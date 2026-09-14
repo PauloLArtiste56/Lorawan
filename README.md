@@ -44,6 +44,7 @@ base de données, on ne peut pas distinguer ce qui est à intégrer de ce qui es
 | Document | Contenu |
 |----------|---------|
 | [`docs/expression-besoins.md`](docs/expression-besoins.md) | **Expression des besoins (G1)** : les 5 points de comptage, le calcul du résidu, les questions ouvertes |
+| [`docs/Expression-des-besoins.docx`](docs/Expression-des-besoins.docx) | La même, en Word sur 2 pages, à faire signer — régénérable via `tools/build-expression-besoins.js` |
 | [`docs/livrables.md`](docs/livrables.md) | Livrables du PRI, avancement, questions aux encadrants |
 | [`docs/planning-180h.md`](docs/planning-180h.md) | Les 180 h sur 35 séances réelles, chemin critique, jalons |
 | [`docs/seances.csv`](docs/seances.csv) | Le calendrier des séances, exploitable par un tableur |
