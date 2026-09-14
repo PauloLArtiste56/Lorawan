@@ -1,34 +1,62 @@
-# Plateforme de gestion de la consommation d'eau — ECAM
+# PRI LoRaWAN — Suivi de la consommation d'eau à l'ECAM
 
-Projet de fin d'études (180 h) : superviser et analyser la consommation d'eau des
-bâtiments de l'ECAM à partir de compteurs communicants **LoRaWAN**.
+Projet de Recherche et Innovation 2026-2027, dans le cadre du projet
+collaboratif **DAISI** — *Data Acquisition Intelligence for Sustainable Industry*.
 
-> **État du projet :** cadrage. Le cahier des charges définitif est attendu.
-> Ce dépôt contient l'architecture retenue, les choix techniques justifiés,
-> la spécification du protocole applicatif et un squelette de code
-> volontairement **agnostique du serveur de réseau LoRaWAN**.
+**Encadrants :** Ivan Martinez, Denys Boiteau
+**Volume :** 180 heures
 
-## Objectifs fonctionnels (à confirmer par le CDC)
+## Le sujet
 
-| # | Objectif | Priorité |
-|---|----------|----------|
-| F1 | Relever automatiquement l'index de chaque compteur (pas horaire) | Indispensable |
-| F2 | Visualiser la consommation par bâtiment / par compteur / par période | Indispensable |
-| F3 | Détecter les fuites (débit de fond continu la nuit) | Indispensable |
-| F4 | Alerter par e-mail / webhook au franchissement d'un seuil | Important |
-| F5 | Comparer les bâtiments et exporter les données (CSV) | Important |
-| F6 | Superviser l'état du parc (batterie, dernier contact, qualité radio) | Important |
-| F7 | Historiser sans perte et supporter les rejeux de données | Souhaitable |
+> Structurer une procédure de mise en œuvre **clé en main** d'une architecture
+> logicielle et matérielle sécurisée pour le relevé et l'exploitation de données
+> de consommation d'énergie.
+>
+> Enjeu : répondre au défi de la raréfaction des ressources, en particulier de l'eau.
+>
+> Mots-clés : *capteurs, LoRaWAN, déploiement physique, gestion de projet.*
 
-## Architecture
+Le résultat attendu n'est donc pas seulement une installation qui fonctionne à
+l'ECAM, mais une **procédure reproductible sur un autre site**. C'est ce qui
+donne sa valeur à la documentation produite ici.
+
+Le périmètre porte principalement sur le **déploiement physique et la gestion de
+projet** : revue de l'existant, étude de propagation, plan de déploiement,
+chiffrage, suivi des travaux, rapport d'exploitation. La mise en œuvre logicielle
+se fait **dans la plateforme ECAM existante** (livrable T6).
+
+👉 **[Liste complète des livrables et état d'avancement](docs/livrables.md)**
+
+## État du projet
+
+Phase de cadrage. Le cahier des charges (livrable G1) est **à produire par
+l'équipe** — ce n'est pas une donnée d'entrée du projet.
+
+Sept questions conditionnent le périmètre et sont à poser aux encadrants ; elles
+sont listées [en fin de `livrables.md`](docs/livrables.md#questions-à-poser-aux-encadrants).
+La plus structurante : **qu'est-ce que « la plateforme ECAM » contient déjà ?**
+Tant qu'on ne sait pas s'il existe une passerelle, un serveur de réseau et une
+base de données, on ne peut pas distinguer ce qui est à intégrer de ce qui est
+à construire.
+
+## Documentation
+
+| Document | Contenu |
+|----------|---------|
+| [`docs/livrables.md`](docs/livrables.md) | Livrables du PRI, avancement, questions aux encadrants |
+| [`docs/planning-180h.md`](docs/planning-180h.md) | Découpage des 180 h, chemin critique, jalons |
+| [`docs/materiel.md`](docs/materiel.md) | Short-list matériel chiffrée, risque de propagation en sous-sol |
+| [`docs/lorawan-payload.md`](docs/lorawan-payload.md) | Spécification du payload applicatif |
+| [`docs/decisions.md`](docs/decisions.md) | Décisions prises et décisions ouvertes |
+
+## Architecture cible
 
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Terrain                                                │
-│                                                         │
 │  Compteur d'eau           Nœud LoRaWAN Class A          │
 │  (sortie impulsion)  ──▶  compte les impulsions,        │
-│   1 imp = 1 ou 10 L       émet un uplink périodique     │
+│                           émet un uplink périodique     │
 └───────────────────────────────┬─────────────────────────┘
                                 │  LoRa 868 MHz
 ┌───────────────────────────────▼─────────────────────────┐
@@ -36,73 +64,35 @@ bâtiments de l'ECAM à partir de compteurs communicants **LoRaWAN**.
 └───────────────────────────────┬─────────────────────────┘
                                 │  Backhaul IP
 ┌───────────────────────────────▼─────────────────────────┐
-│  Serveur de réseau (LNS) — ChirpStack *ou* TTN          │
-│  join OTAA, déduplication, ADR, MAC layer               │
+│  Serveur de réseau — à confirmer avec le partenaire     │
+│  LPWAN de DAISI                                         │
 └───────────────────────────────┬─────────────────────────┘
                                 │  MQTT (JSON)
 ┌───────────────────────────────▼─────────────────────────┐
-│  Plateforme (ce dépôt)                                  │
-│                                                         │
-│  ingest/  adaptateur LNS ─▶ codec ─▶ base time-series   │
-│  api/     API REST (FastAPI)                            │
-│  alerting détection de fuite, notifications             │
-│  web/     dashboard                                     │
+│  Plateforme ECAM — périmètre exact à établir (T1)       │
+│  ingestion, historisation, visualisation, alertes       │
 └─────────────────────────────────────────────────────────┘
 ```
 
-Le point clé de cette architecture est la **couche d'adaptation LNS**
-(`backend/app/ingest/`) : ChirpStack et TTN publient tous deux les uplinks en
-MQTT mais avec des topics et des schémas JSON différents. En normalisant dès
-l'entrée vers un objet `Uplink` unique, le reste de la plateforme ignore
-totalement quel LNS est utilisé — et le choix peut être tranché (ou changé)
-sans réécrire l'application.
+## Outillage développé
 
-## Choix techniques
+Ce dépôt contient un outillage technique produit pendant la phase de cadrage.
+**Son utilité dépend des réponses aux questions ci-dessus** : si la plateforme
+ECAM assure déjà l'ingestion et le décodage, seule une partie restera pertinente.
+Il est conservé parce qu'il coûte peu et qu'il sert d'appui documentaire au
+choix du format de trame.
 
-| Couche | Choix | Pourquoi |
-|--------|-------|----------|
-| Langage backend | **Python 3.11** | Écosystème d'analyse de données (pandas, scipy) directement utile pour la détection de fuite ; largement enseigné, donc maintenable après le projet. |
-| Framework API | **FastAPI** | Typage Pydantic, documentation OpenAPI générée automatiquement (utile pour la soutenance), asynchrone — adapté à un consommateur MQTT permanent. |
-| Base de données | **PostgreSQL + TimescaleDB** | Les relevés de compteurs sont des séries temporelles : agrégats continus, compression, rétention. Reste du SQL standard, donc pas de techno exotique à défendre. |
-| Transport LNS → plateforme | **MQTT** | Seul dénominateur commun à ChirpStack et TTN ; push temps réel, pas de polling. |
-| Dashboard | **React + Recharts** (à confirmer) | À figer après le CDC. Alternative rapide : Grafana branché sur TimescaleDB, qui couvre F2/F5 sans développement. |
-| Déploiement | **Docker Compose** | Reproductible sur une VM ECAM ou un Raspberry Pi ; simplifie la reprise du projet. |
-
-> **Note sur Grafana** : si le CDC n'impose pas d'interface sur mesure, brancher
-> Grafana sur TimescaleDB fait gagner ~30 h sur les 180 h, à réinvestir dans
-> l'algorithme de détection de fuite — qui est la vraie valeur ajoutée du projet.
-
-## Structure du dépôt
-
-```
-backend/
-  app/codec/     encodage/décodage du payload applicatif        ✅
-  app/ingest/    adaptateurs ChirpStack / TTN → modèle unifié   ✅
-  app/api/       routes REST                                    ⏳ après le CDC
-  app/storage/   modèle de données time-series                  ⏳ après le CDC
-  app/alerting/  détection de fuite et notifications            ⏳ après le CDC
-decoders/        décodeurs JavaScript à coller dans le LNS      ✅
-simulator/       simulateur de parc de compteurs                ✅
-docs/            architecture, matériel, protocole, planning    ✅
-web/             dashboard                                      ⏳ après le CDC
-```
-
-Les briques marquées ⏳ dépendent d'arbitrages du cahier des charges
-(voir [`docs/decisions.md`](docs/decisions.md)) et n'ont volontairement pas été
-développées à l'aveugle.
-
-## Documentation
-
-- [`docs/materiel.md`](docs/materiel.md) — short-list matériel chiffrée et risques radio
-- [`docs/lorawan-payload.md`](docs/lorawan-payload.md) — spécification du payload applicatif
-- [`docs/planning-180h.md`](docs/planning-180h.md) — découpage des 180 h
-- [`docs/decisions.md`](docs/decisions.md) — décisions ouvertes à trancher
-
-## Démarrage rapide
+| Composant | Rôle | Reste utile si… |
+|-----------|------|-----------------|
+| `decoders/water_meter_decoder.js` | Décodeur à déployer sur le serveur de réseau | …quel que soit le cas : tout LNS a besoin d'un décodeur |
+| `backend/app/codec/` | Référence exécutable du format de trame | …le format de trame reste à définir |
+| `backend/app/ingest/` | Normalisation ChirpStack / The Things Stack | …la plateforme ECAM n'assure pas déjà l'ingestion |
+| `simulator/` | Simulateur de parc, avec injection de fuite | …il faut démontrer la chaîne sans matériel |
 
 ```bash
-cd backend
-python -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
-pytest
+# Aperçu : 30 h de consommation simulée, avec une fuite injectée
+python3 simulator/simulate_nodes.py --dry-run --hours 30 --leak compteur-labos
+
+# Tests
+cd backend && pip install -e ".[dev]" && pytest
 ```
