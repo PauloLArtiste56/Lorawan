@@ -18,7 +18,7 @@ de données de consommation d'énergie.*
 
 | # | Livrable | État | Où |
 |---|----------|------|-----|
-| T1 | Revue des matériels et logiciels disponibles | ⏳ à faire | — |
+| T1 | Revue des matériels et logiciels disponibles | 🟡 amorcé | [`expression-besoins.md`](expression-besoins.md#2-moyens-disponibles) — 3 passerelles, ChirpStack |
 | T2 | Plan de déploiement (support AutoCAD ou équivalent) | ⏳ à faire | — |
 | T3 | Étude de propagation LoRaWAN, entre simulation et réalité terrain | 🟡 amorcé | [`materiel.md`](materiel.md#risque-principal--la-propagation-radio-en-sous-sol) |
 | T4 | Identification des matériels complémentaires (capteurs / compteurs) + devis fournisseur | 🟡 amorcé | [`materiel.md`](materiel.md) — short-list à convertir en devis |
@@ -30,8 +30,8 @@ de données de consommation d'énergie.*
 
 | # | Livrable | État | Où |
 |---|----------|------|-----|
-| G1 | Cahier des charges / expression des besoins | ⏳ **à produire par l'équipe** | — |
-| G2 | Objectifs, périmètre et critères de réussite | ⏳ à faire | — |
+| G1 | Cahier des charges / expression des besoins | 🟡 rédigé, à valider le 18/09 | [`expression-besoins.md`](expression-besoins.md) |
+| G2 | Objectifs, périmètre et critères de réussite | 🟡 amorcé | [`expression-besoins.md`](expression-besoins.md#7-critères-de-réussite-proposés-livrable-g2) |
 | G3 | Planning et jalons | 🟢 fait | [`planning-180h.md`](planning-180h.md), [`seances.csv`](seances.csv) |
 | G4 | Répartition des rôles et responsabilités | ⏳ à faire | — |
 | G5 | Analyse des risques et plan d'actions | 🟡 amorcé | [`materiel.md`](materiel.md), [`planning-180h.md`](planning-180h.md#chemin-critique) |

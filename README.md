@@ -43,6 +43,7 @@ base de données, on ne peut pas distinguer ce qui est à intégrer de ce qui es
 
 | Document | Contenu |
 |----------|---------|
+| [`docs/expression-besoins.md`](docs/expression-besoins.md) | **Expression des besoins (G1)** : les 5 points de comptage, le calcul du résidu, les questions ouvertes |
 | [`docs/livrables.md`](docs/livrables.md) | Livrables du PRI, avancement, questions aux encadrants |
 | [`docs/planning-180h.md`](docs/planning-180h.md) | Les 180 h sur 35 séances réelles, chemin critique, jalons |
 | [`docs/seances.csv`](docs/seances.csv) | Le calendrier des séances, exploitable par un tableur |
@@ -63,17 +64,16 @@ base de données, on ne peut pas distinguer ce qui est à intégrer de ce qui es
 └───────────────────────────────┬─────────────────────────┘
                                 │  LoRa 868 MHz
 ┌───────────────────────────────▼─────────────────────────┐
-│  Passerelle LoRaWAN (campus)                            │
+│  3 passerelles LoRaWAN (déjà disponibles)               │
 └───────────────────────────────┬─────────────────────────┘
                                 │  Backhaul IP
 ┌───────────────────────────────▼─────────────────────────┐
-│  Serveur de réseau — à confirmer avec le partenaire     │
-│  LPWAN de DAISI                                         │
+│  ChirpStack — visualisation et paramétrage des nœuds    │
 └───────────────────────────────┬─────────────────────────┘
                                 │  MQTT (JSON)
 ┌───────────────────────────────▼─────────────────────────┐
 │  Plateforme ECAM — périmètre exact à établir (T1)       │
-│  ingestion, historisation, visualisation, alertes       │
+│  historisation, bilan SC5 − (SC1+SC2+SC3+SC4), alertes   │
 └─────────────────────────────────────────────────────────┘
 ```
 

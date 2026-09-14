@@ -7,7 +7,7 @@ N;Date;Jour;Semaine;Heures;Cumul;Bloc;Tache;Livrables
 6;22/09/2026;mardi;2;2;26;Revue de l'existant;Revue des matériels et logiciels disponibles;T1
 7;23/09/2026;mercredi;2;4;30;Revue de l'existant;Relevé du parc de compteurs existant sur site;T1
 8;28/09/2026;lundi;3;6;36;Propagation;Bilan de liaison théorique et choix du modèle d'affaiblissement;T3
-9;29/09/2026;mardi;3;2;38;Propagation;Protocole de la campagne de mesures. Commande du kit de test;T3
+9;29/09/2026;mardi;3;2;38;Propagation;Protocole de la campagne de mesures. Commande des nœuds de test;T3
 10;09/10/2026;vendredi;4;4;42;Propagation;Simulation de couverture. Relance des démarches en attente;T3
 11;03/11/2026;mardi;8;4;46;Propagation;Campagne de mesures terrain — bâtiment A;T3
 12;04/11/2026;mercredi;8;2;48;Propagation;Campagne de mesures terrain — bâtiment B;T3
@@ -22,7 +22,7 @@ N;Date;Jour;Semaine;Heures;Cumul;Bloc;Tache;Livrables
 21;08/12/2026;mardi;13;4;90;Mise en œuvre;Configuration des nœuds et du décodeur de payload;T6
 22;09/12/2026;mercredi;13;8;98;Mise en œuvre;Intégration dans la plateforme ECAM;T6
 23;10/12/2026;jeudi;13;8;106;Mise en œuvre;Intégration dans la plateforme ECAM (suite);T6
-24;11/12/2026;vendredi;13;8;114;Mise en œuvre;Tests de bout en bout sur le kit de test;T6
+24;11/12/2026;vendredi;13;8;114;Mise en œuvre;Tests de bout en bout sur un nœud de test;T6
 25;04/01/2027;lundi;17;4;118;Installation;Préparation du chantier avec le service technique;T6
 26;05/01/2027;mardi;17;8;126;Installation;Suivi des travaux, pose des compteurs;T6
 27;06/01/2027;mercredi;17;8;134;Installation;Mise en service des nœuds sur site;T6

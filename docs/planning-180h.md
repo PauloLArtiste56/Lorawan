@@ -56,7 +56,7 @@ Le planning ci-dessous les exploite délibérément.
 | 7 | 23/09 | mer | 2 | 4 | 30 | Relevé du parc de compteurs existant sur site | T1 |
 | | | | | | | **Propagation** | |
 | 8 | 28/09 | lun | 3 | 6 | 36 | Bilan de liaison théorique et choix du modèle d'affaiblissement | T3 |
-| 9 | 29/09 | mar | 3 | 2 | 38 | Protocole de la campagne de mesures. Commande du kit de test | T3 |
+| 9 | 29/09 | mar | 3 | 2 | 38 | Protocole de la campagne de mesures. Commande des nœuds de test | T3 |
 | 10 | 09/10 | ven | 4 | 4 | 42 | Simulation de couverture. Relance des démarches en attente | T3 |
 | 11 | 03/11 | mar | 8 | 4 | 46 | Campagne de mesures terrain — bâtiment A | T3 |
 | 12 | 04/11 | mer | 8 | 2 | 48 | Campagne de mesures terrain — bâtiment B | T3 |
@@ -74,7 +74,7 @@ Le planning ci-dessous les exploite délibérément.
 | 21 | 08/12 | mar | 13 | 4 | 90 | Configuration des nœuds et du décodeur de payload | T6 |
 | 22 | 09/12 | mer | 13 | 8 | 98 | Intégration dans la plateforme ECAM | T6 |
 | 23 | 10/12 | jeu | 13 | 8 | 106 | Intégration dans la plateforme ECAM (suite) | T6 |
-| 24 | 11/12 | ven | 13 | 8 | 114 | Tests de bout en bout sur le kit de test | T6 |
+| 24 | 11/12 | ven | 13 | 8 | 114 | Tests de bout en bout sur un nœud de test | T6 |
 | | | | | | | **Installation** | |
 | 25 | 04/01 | lun | 17 | 4 | 118 | Préparation du chantier avec le service technique | T6 |
 | 26 | 05/01 | mar | 17 | 8 | 126 | Suivi des travaux, pose des compteurs | T6 |
@@ -120,23 +120,29 @@ Conséquence : les demandes de devis partent dès le **13 novembre**, sur la
 nomenclature issue des mesures, sans attendre que le plan AutoCAD soit fini.
 Le plan (20 et 27 novembre) et les devis avancent en parallèle.
 
-## La décision à prendre dès septembre : commander un kit de test
+## La décision à prendre dès septembre
 
-La campagne de mesures du 3 novembre nécessite une passerelle et un nœud. Or
-ce matériel fait partie de la commande… qui dépend justement des mesures.
+L'ECAM dispose déjà de **trois passerelles**, ce qui supprime la dépendance la
+plus lourde : la campagne de mesures de novembre n'attend aucune livraison de
+passerelle.
 
-Pour casser cette boucle : **commander dès le 29 septembre un kit de test
-minimal** — une passerelle et deux nœuds, de l'ordre de 250 à 350 €, hors
-procédure de devis complète. Ce kit permet :
+Reste un point à vérifier immédiatement — **disposons-nous d'un nœud compteur
+d'impulsions ?** La campagne de mesures du 3 novembre en exige au moins un, et
+la semaine bloquée du 7 décembre en exige un pour monter la chaîne complète
+avant l'arrivée des compteurs commandés.
 
-- de faire la campagne de mesures en novembre ;
-- de monter la passerelle, le serveur de réseau et l'intégration dans la
-  plateforme ECAM pendant la semaine du 7 décembre, **sans dépendre de la
-  livraison de la commande principale**.
+Si aucun nœud n'est disponible, **en commander deux dès le 29 septembre** (de
+l'ordre de 80 à 150 €), hors procédure de devis. Sans cela :
 
-Sans ce kit, la semaine bloquée de décembre ne peut pas être utilisée, et les
-36 h les plus productives du projet sont perdues. C'est la décision au meilleur
-rapport coût/bénéfice de tout le planning.
+- la campagne de mesures de novembre est repoussée ;
+- la semaine bloquée de décembre, soit 36 h et les heures les plus productives
+  du projet, ne peut pas être utilisée.
+
+Deuxième démarche à lancer en septembre, sur le même chemin critique : la
+**demande d'accès WiFi pour les passerelles** auprès du service informatique.
+Le partage de connexion depuis un téléphone permet de mener les mesures, mais
+pas d'exploiter l'installation. Un refus tardif imposerait un raccordement
+filaire ou un abonnement 4G, à budgéter avant la commande du 4 décembre.
 
 ## Jalons
 
@@ -146,13 +152,13 @@ rapport coût/bénéfice de tout le planning.
 | J2 | 23/09 | Inventaire de l'existant établi, périmètre physique arrêté |
 | J3 | 13/11 | Couverture démontrée par la mesure, écarts simulation/terrain analysés |
 | J4 | **04/12** | **Devis obtenus, budget validé, commande passée — aucune marge** |
-| J5 | 11/12 | Chaîne complète démontrée de bout en bout sur le kit de test |
+| J5 | 11/12 | Chaîne complète démontrée de bout en bout dans ChirpStack, sur un nœud de test |
 | J6 | 08/01 | Installation réelle recettée avec le service technique |
 
 **J5 est le filet de sécurité.** S'il est tenu, une démonstration fonctionnelle
 existe pour la soutenance même si l'installation physique prend du retard. C'est
 la raison pour laquelle la semaine de décembre est consacrée à l'intégration sur
-le kit de test plutôt qu'à attendre le matériel définitif.
+un nœud de test plutôt qu'à attendre les compteurs commandés.
 
 ## Risque de périmètre
 

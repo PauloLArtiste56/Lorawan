@@ -9,7 +9,7 @@ T-07;Revue de l'existant;Inventaire de la plateforme ECAM existante;T1;;4;2;1;Tr
 T-08;Revue de l'existant;Revue des matériels et logiciels disponibles;T1;;2;2;1;Travail
 T-09;Revue de l'existant;Relevé du parc de compteurs existant sur site;T1;;4;2;1;Travail
 T-10;Propagation;Bilan de liaison théorique et modèle d'affaiblissement;T3;;6;3;1;Travail
-T-11;Propagation;Protocole de mesures et commande du kit de test;T3;;2;3;1;Travail
+T-11;Propagation;Protocole de mesures et commande des nœuds de test;T3;;2;3;1;Travail
 T-12;Propagation;Simulation de couverture;T3;;4;4;1;Travail
 T-13;Propagation;Campagne de mesures terrain;T3;;8;8;1;Travail
 T-14;Propagation;Analyse des écarts simulation / terrain;T3;;2;9;1;Travail
@@ -22,7 +22,7 @@ T-20;Chiffrage;Devis d'installation, validation du budget, COMMANDE;T5;;4;12;1;T
 T-21;Mise en œuvre;Mise en service de la passerelle et du serveur de réseau;T6;;8;13;1;Travail
 T-22;Mise en œuvre;Configuration des nœuds et du décodeur de payload;T6;;4;13;1;Travail
 T-23;Mise en œuvre;Intégration dans la plateforme ECAM;T6;;16;13;1;Travail
-T-24;Mise en œuvre;Tests de bout en bout sur le kit de test;T6;;8;13;1;Travail
+T-24;Mise en œuvre;Tests de bout en bout sur un nœud de test;T6;;8;13;1;Travail
 T-25;Installation;Préparation du chantier avec le service technique;T6;;4;17;1;Travail
 T-26;Installation;Suivi des travaux, pose des compteurs;T6;;8;17;1;Travail
 T-27;Installation;Mise en service des nœuds sur site;T6;;8;17;1;Travail
@@ -34,7 +34,7 @@ T-32;Clôture;Rapport final de projet;G9;;12;20;1;Travail
 T-33;Clôture;Préparation de la soutenance et de la démonstration;G10;;6;20;1;Travail
 T-34;Clôture;Soutenance finale;G10;;8;20;1;Travail
 D-01;Délai subi;Attente des réponses encadrants, DSI et service technique;;;0;2;6;Délai subi
-D-02;Délai subi;Livraison du kit de test;;;0;4;4;Délai subi
+D-02;Délai subi;Livraison des nœuds de test;;;0;4;4;Délai subi
 D-03;Délai subi;Instruction des devis par les fournisseurs;;;0;9;3;Délai subi
 D-04;Délai subi;Approvisionnement du matériel commandé;;;0;13;4;Délai subi
 D-05;Délai subi;Attente du créneau du service technique;;;0;13;4;Délai subi

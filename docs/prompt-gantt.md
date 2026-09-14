@@ -168,14 +168,15 @@ Statut, Date réelle, Écart en jours.
   J2 | 23/09/2026 | Inventaire de l'existant établi, périmètre physique arrêté
   J3 | 13/11/2026 | Couverture démontrée par la mesure, écarts simulation/terrain analysés
   J4 | 04/12/2026 | Devis obtenus, budget validé, commande du matériel passée
-  J5 | 11/12/2026 | Chaîne complète démontrée de bout en bout sur le kit de test
+  J5 | 11/12/2026 | Chaîne complète démontrée de bout en bout dans ChirpStack, sur un nœud de test
   J6 | 08/01/2027 | Installation réelle recettée avec le service technique
 Ajoute une colonne Commentaire et renseigne-la pour deux jalons :
   - J4 : aucune marge. La livraison doit tomber pendant les vacances de Noël et
     la pose pendant la semaine bloquée du 4 janvier. Après le 8 janvier il ne
     reste que 30 h, toutes nécessaires aux rapports et à la soutenance.
   - J5 : filet de sécurité. S'il est tenu, une démonstration existe pour la
-    soutenance même si l'installation physique prend du retard.
+    soutenance même si l'installation physique prend du retard. L'ECAM disposant
+    déjà de ses trois passerelles, ce jalon ne dépend que d'un nœud de test.
 Mets J4 en évidence. Colore l'écart : vert si négatif ou nul, orange jusqu'à
 7 jours, rouge au-delà.
 
@@ -185,8 +186,10 @@ Gravité de 1 à 4, Criticité (le produit), Parade, Responsable, Statut.
   R2 | Commande non passée au 4 décembre | Devis tardifs ou validation budgétaire lente | 3 | 4
   R3 | Indisponibilité du service technique sur le créneau de janvier | Créneau unique, charge du service | 3 | 4
   R4 | Délai d'approvisionnement dépassant les vacances de Noël | Ruptures fréquentes sur les nœuds LoRaWAN | 3 | 4
+  R9 | Accès WiFi refusé par le service informatique pour les passerelles | Politique de sécurité ; le partage de connexion téléphonique n'est pas viable en exploitation | 2 | 4
+  R10 | Consommation de l'entreprise tierce non isolable sur SC3 | Dérivation en amont du point de pose envisagé | 3 | 3
   R5 | Périmètre de la plateforme ECAM existante mal cerné | Absence d'inventaire initial | 3 | 3
-  R6 | Kit de test non disponible pour la campagne de novembre | Commande passée trop tard en septembre | 2 | 4
+  R6 | Nœud compteur d'impulsions non disponible pour la campagne de novembre | Commande passée trop tard en septembre | 2 | 4
   R7 | Refus ou restriction de la DSI sur l'hébergement et les flux réseau | Politique de sécurité de l'établissement | 2 | 3
   R8 | Plans AutoCAD indisponibles ou obsolètes | Archives des services techniques | 2 | 2
 Trie par criticité décroissante, colore la criticité en échelle vert-orange-rouge,
