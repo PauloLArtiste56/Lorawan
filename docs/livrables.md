@@ -32,7 +32,7 @@ de données de consommation d'énergie.*
 |---|----------|------|-----|
 | G1 | Cahier des charges / expression des besoins | ⏳ **à produire par l'équipe** | — |
 | G2 | Objectifs, périmètre et critères de réussite | ⏳ à faire | — |
-| G3 | Planning et jalons | 🟡 amorcé | [`planning-180h.md`](planning-180h.md) |
+| G3 | Planning et jalons | 🟢 fait | [`planning-180h.md`](planning-180h.md), [`seances.csv`](seances.csv) |
 | G4 | Répartition des rôles et responsabilités | ⏳ à faire | — |
 | G5 | Analyse des risques et plan d'actions | 🟡 amorcé | [`materiel.md`](materiel.md), [`planning-180h.md`](planning-180h.md#chemin-critique) |
 | G6 | Suivi d'avancement : réunions, comptes rendus, indicateurs | ⏳ à faire | — |

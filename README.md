@@ -44,7 +44,9 @@ base de données, on ne peut pas distinguer ce qui est à intégrer de ce qui es
 | Document | Contenu |
 |----------|---------|
 | [`docs/livrables.md`](docs/livrables.md) | Livrables du PRI, avancement, questions aux encadrants |
-| [`docs/planning-180h.md`](docs/planning-180h.md) | Découpage des 180 h, chemin critique, jalons |
+| [`docs/planning-180h.md`](docs/planning-180h.md) | Les 180 h sur 35 séances réelles, chemin critique, jalons |
+| [`docs/seances.csv`](docs/seances.csv) | Le calendrier des séances, exploitable par un tableur |
+| [`docs/prompt-gantt.md`](docs/prompt-gantt.md) | Prompt pour générer le classeur Excel de suivi de projet |
 | [`docs/materiel.md`](docs/materiel.md) | Short-list matériel chiffrée, risque de propagation en sous-sol |
 | [`docs/lorawan-payload.md`](docs/lorawan-payload.md) | Spécification du payload applicatif |
 | [`docs/decisions.md`](docs/decisions.md) | Décisions prises et décisions ouvertes |
