@@ -1,0 +1,25 @@
+Rubrique;Information a relever;P1 Annexe/NE;P2 Cafeteria;P3 S4;P4 Maupertuis;P5 Arrivee generale;V1 Vanne
+Canalisation;Diametre nominal (DN);;;;;;
+Canalisation;Materiau;;;;;;
+Canalisation;Type et diametre de raccordement;;;;;;
+Canalisation;Orientation de pose (horizontale / verticale);;;;;;
+Canalisation;Sens d'ecoulement;;;;;;
+Canalisation;Pression de service;;;;;;
+Longueurs droites;Longueur droite amont disponible;;;;;;
+Longueurs droites;Longueur droite aval disponible;;;;;;
+Longueurs droites;Singularites proches (coude, te, vanne) et distance;;;;;;
+Isolement;Vanne d'isolement existante en amont;;;;;;
+Isolement;Vanne d'isolement existante en aval;;;;;;
+Isolement;Vannes a ajouter de part et d'autre ?;;;;;;
+Isolement;La zone peut-elle etre isolee seule ?;;;;;;
+Acces;Local et niveau;;;;;;
+Acces;Hauteur du point / sol;;;;;;
+Acces;Encombrement autour du point;;;;;;
+Acces;Acces : cle, code, contact;;;;;;
+Acces;Local enterre / murs beton / trappe metallique;;;;;;
+Acces;Alimentation electrique a proximite;;;;;;
+Radio (par nous);RSSI mesure;;;;;;
+Radio (par nous);SNR mesure;;;;;;
+Radio (par nous);Facteur d'etalement obtenu;;;;;;
+Radio (par nous);Passerelle de reference;;;;;;
+Radio (par nous);Photo prise (O/N);;;;;;

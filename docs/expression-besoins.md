@@ -29,13 +29,23 @@ la couverture.
 
 ### Affectation des sous-compteurs
 
+Le découpage fait suite à l'étude des circulations menée par les encadrants
+(mail de D. Boiteau du 14/09/2026) : **une vanne et quatre sous-compteurs, plus
+l'arrivée générale**.
+
 | Repère | Zone couverte | Particularité |
 |--------|---------------|---------------|
-| **SC1** | Partie annexe de l'ECAM : cuisine et appartement | — |
-| **SC2** | S4 : toilettes et lavabos des salles de TP | — |
-| **SC3** | S1 | ⚠️ Inclut la dérivation d'une **entreprise tierce**, à soustraire |
-| **SC4** | Bar et toilettes principales | — |
-| **SC5** | Arrivée d'eau générale de l'ECAM | À confirmer |
+| **SC1** | Annexe / NE | Correspond a priori à la cuisine et à l'appartement |
+| **SC2** | Cafétéria | Correspond a priori au bar et aux toilettes principales |
+| **SC3** | S4 | Toilettes et lavabos des salles de TP |
+| **SC4** | Maupertuis | ⚠️ À rapprocher du point « S1 » de nos notes, qui comporte la dérivation d'une **entreprise tierce** |
+| **SC5** | Arrivée générale de l'ECAM | Index total télérelevé |
+| **V1** | Vanne | ⚠️ Emplacement et fonction à préciser |
+
+⚠️ **Le S3 n'est équipé d'aucun sous-compteur**, alors que c'est l'écoulement
+constant constaté dans ses toilettes qui motive le projet. Une fuite au S3
+apparaîtrait dans le résidu, donc serait détectée, mais **non localisée**. À
+arbitrer avec les encadrants.
 
 ### Topologie
 
@@ -152,16 +162,34 @@ meilleure** sur les points où une détection de fuite est attendue.
 
 Comparer deux scénarios d'achat :
 
-| Scénario | Avantage | Point de vigilance |
-|----------|----------|--------------------|
-| Achat des sous-compteurs par l'ECAM, pose par le plombier | Prix des matériels maîtrisé, choix du modèle libre | ⚠️ Le plombier peut refuser de garantir une pose sur du matériel qu'il n'a pas fourni |
-| Fourniture et pose par le plombier | Responsabilité unique, garantie globale | Marge sur le matériel, choix du modèle restreint |
+**Décidé** (mail du 14/09) : **l'ECAM achète le matériel**, le plombier réalise
+la pose. Le devis demandé porte donc sur la seule intervention. Des fonds DAISI
+peuvent contribuer à la financer.
 
-Le devis doit dans les deux cas faire apparaître séparément la fourniture et la
-pose, sinon la comparaison est impossible.
+Conséquence : la **spécification des compteurs nous incombe**. C'est à nous de
+garantir qu'ils sont compatibles avec les diamètres relevés, avec les longueurs
+droites disponibles et avec les nœuds LoRaWAN.
 
-⚠️ Exiger que la sortie **impulsion** figure explicitement dans le devis. Un
-compteur d'eau standard ne la comporte pas, et sans elle rien ne remonte.
+⚠️ La sortie **impulsion** doit figurer explicitement dans la commande. Un
+compteur d'eau standard ne la comporte pas, et sans elle rien ne remonte : c'est
+l'erreur de spécification qui coûterait le projet.
+
+### T-e. Contrainte majeure : la vidange complète
+
+Toute intervention sur le réseau impose de **vidanger l'ECAM en totalité**. Il
+n'y aura donc pas de second passage pour compléter une pose oubliée.
+
+Deux conséquences :
+
+1. Le diagnostic doit être **exhaustif** avant l'intervention — d'où la grille de
+   relevé ([`grille-diagnostic-plombier.md`](grille-diagnostic-plombier.md)).
+2. Chaque compteur doit être encadré de **deux vannes d'isolement**, faute de
+   quoi son remplacement dans quelques années imposera une nouvelle vidange
+   générale du site pour un seul appareil. Le surcoût est marginal au regard
+   d'une vidange ; la décision se prend maintenant ou jamais.
+
+L'ECAM envisage de faire réintervenir le plombier pour le S3 : **synchroniser les
+deux interventions** est l'occasion à ne pas manquer.
 
 ### T-d. Chaîne de remontée des données
 
@@ -186,10 +214,13 @@ disponibilité des nœuds compteurs d'impulsions (question Q1).
 | # | Question | Pourquoi c'est bloquant |
 |---|----------|-------------------------|
 | Q1 | Disposons-nous déjà des **nœuds LoRaWAN compteurs d'impulsions**, ou seulement des passerelles ? | Sans nœud, la campagne de mesures de novembre est impossible. À commander immédiatement le cas échéant. |
-| Q2 | SC3 peut-il être posé **en aval de la dérivation** de l'entreprise tierce ? | Détermine s'il faut un sixième compteur, donc le budget et le plan de pose. |
+| Q2 | Le compteur de Maupertuis peut-il être posé **en aval de la dérivation** de l'entreprise tierce ? | Détermine s'il faut un sixième compteur, donc le budget et le plan de pose. |
 | Q3 | SC5 remplace-t-il le compteur du distributeur, ou s'y ajoute-t-il ? | Conditionne la façon de recouper les index avec la facture d'eau. |
 | Q4 | La demande d'accès WiFi au service informatique est-elle déposée ? | Sur le chemin critique ; un refus impose une solution filaire ou 4G à budgéter. |
-| Q5 | Quel budget est alloué, et qui passe commande ? | La commande doit partir le 04/12 au plus tard. |
+| Q5 | Qui passe commande, sur quel budget, avec quel délai de validation ? | Des fonds DAISI existent ; le circuit d'achat conditionne le délai de livraison. |
+| Q8 | Quelle **date d'intervention** et quelle **date de diagnostic** ? | Si l'intervention a lieu aux vacances de la Toussaint, tout doit être livré avant le 09/10. |
+| Q9 | Le **S3** est-il inclus dans une zone comptée ? | Sinon sa fuite n'est détectée que par différence, sans localisation. |
+| Q10 | Où et pourquoi la **vanne V1** ? | Absente de nos notes initiales. |
 | Q6 | Les toilettes non équipées sont-elles identifiées et localisées ? | Sans cela, le résidu ne peut pas être interprété. |
 | Q7 | Quelle **précision attendue** sur le résidu ? | Le résidu cumule les erreurs des cinq compteurs : c'est la grandeur la moins précise du système, alors que c'est celle qui porte la détection de fuite. |
 

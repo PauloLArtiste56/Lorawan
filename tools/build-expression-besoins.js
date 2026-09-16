@@ -123,7 +123,7 @@ const doc = new Document({
 
       // ---------- 1 ----------
       h("1.  Besoin"),
-      p("Mesurer et suivre la consommation d'eau de l'ECAM par zone d'usage, afin d'identifier les postes de consommation et de détecter les dérives. Les relevés sont transmis par LoRaWAN et exploités dans ChirpStack, utilisé à la fois pour la visualisation et pour le paramétrage des nœuds."),
+      p("Mesurer et suivre la consommation d'eau de l'ECAM par zone d'usage, afin d'identifier les postes de consommation et de détecter les dérives. Les relevés sont transmis par LoRaWAN et exploités dans ChirpStack, pour la visualisation comme pour le paramétrage des nœuds."),
 
       // ---------- 2 ----------
       h("2.  Moyens disponibles"),
@@ -133,18 +133,20 @@ const doc = new Document({
         ["Nœuds compteurs d'impulsions", "À confirmer", "Voir question Q1"],
         ["Serveur de réseau", "ChirpStack", "Décidé"],
       ], { premierGras: true }),
-      new Paragraph({ spacing: { after: 60 }, children: [] }),
       p("Trois passerelles pour cinq points de comptage autorisent de la redondance radio : la contrainte porte sur le placement, non sur la couverture."),
 
       // ---------- 3 ----------
       h("3.  Périmètre : affectation des sous-compteurs"),
-      table([900, 4500, 4346], ["Repère", "Zone couverte", "Point d'attention"], [
-        ["SC1", "Partie annexe de l'ECAM : cuisine et appartement", "—"],
-        ["SC2", "S4 : toilettes et lavabos des salles de TP", "—"],
-        ["SC3", "S1", "Inclut la dérivation d'une entreprise tierce"],
-        ["SC4", "Bar et toilettes principales", "—"],
-        ["SC5", "Arrivée d'eau générale de l'ECAM", "Index total télérelevé"],
-      ], { premierGras: true, alerte: [2] }),
+      p("Découpage issu de l'étude des circulations menée par les encadrants (mail du 14/09/2026) : une vanne et quatre sous-compteurs, plus l'arrivée générale."),
+      table([900, 3100, 5746], ["Repère", "Zone couverte", "Point d'attention"], [
+        ["SC1", "Annexe / NE", "A priori la cuisine et l'appartement"],
+        ["SC2", "Cafétéria", "A priori le bar et les toilettes principales"],
+        ["SC3", "S4", "Toilettes et lavabos des salles de TP"],
+        ["SC4", "Maupertuis", "À rapprocher du point « S1 » de nos notes, qui comporte la dérivation d'une entreprise tierce"],
+        ["SC5", "Arrivée générale de l'ECAM", "Index total télérelevé"],
+        ["V1", "Vanne", "Emplacement et fonction à préciser"],
+      ], { premierGras: true, alerte: [3, 5] }),
+      p([nb("Le S3 n'est équipé d'aucun sous-compteur", { bold: true }), nb(", alors que l'écoulement constant constaté dans ses toilettes motive le projet : une fuite y serait détectée par le résidu, mais non localisée. À arbitrer.")]),
 
       // ---------- 4 ----------
       h("4.  Calcul du poste non sous-compté"),
@@ -160,30 +162,33 @@ const doc = new Document({
       p([
         nb("Consommation propre à l'ECAM : "),
         nb("ECAM = SC5 − entreprise tierce", { bold: true }),
-        nb(". Plutôt que de soustraire cette consommation, qu'il faudrait connaître, la solution à privilégier est de poser SC3 en aval de la dérivation, de sorte qu'il ne voie que l'ECAM : la soustraction disparaît. À défaut, un sixième sous-compteur est nécessaire."),
+        nb(". Plutôt que de soustraire cette consommation, qu'il faudrait connaître, poser le compteur en aval de la dérivation de sorte qu'il ne voie que l'ECAM : la soustraction disparaît. À défaut, un sixième compteur est nécessaire."),
       ]),
 
       // ---------- 5 ----------
       h("5.  Travaux à mener"),
       p([nb("a.  Étude de propagation et placement des passerelles. ", { bold: true }),
-         nb("Positionner les trois passerelles de sorte que les cinq sous-compteurs remontent leurs données de façon fiable ; produire le schéma de propagation. Raccordement réseau : le WiFi de l'ECAM, autorisé par le service informatique, pour l'exploitation définitive ; le partage de connexion depuis un téléphone pour la seule campagne de mesures. Une passerelle en exploitation devant rester connectée en permanence, la demande d'accès est à déposer dès septembre ; un refus imposerait un raccordement filaire ou un abonnement 4G, à budgéter.")]),
+         nb("Positionner les trois passerelles de sorte que les cinq sous-compteurs remontent leurs données de façon fiable ; produire le schéma de propagation. Raccordement réseau : le WiFi de l'ECAM pour l'exploitation, le partage de connexion téléphonique pour la seule campagne de mesures. Une passerelle en exploitation devant rester connectée en permanence, la demande d'accès est à déposer dès septembre ; un refus imposerait du filaire ou de la 4G, à budgéter.")]),
       p([nb("b.  Relevé des canalisations. ", { bold: true }),
-         nb("Relever à chaque point de pose le diamètre nominal, le type de raccord et la longueur droite disponible en amont et en aval, sans laquelle le compteur sort de sa classe de précision. Choisir une classe métrologique R160 ou meilleure là où une détection de fuite est attendue : un compteur surdimensionné ne voit pas les petits débits, où se lisent les fuites.")]),
-      p([nb("c.  Demandes de devis. ", { bold: true }),
-         nb("Comparer deux scénarios : achat des sous-compteurs par l'ECAM et pose par le plombier, ou fourniture et pose par le plombier. Le premier maîtrise le prix et le choix du modèle, mais le plombier peut refuser de garantir une pose sur du matériel qu'il n'a pas fourni. Exiger dans les deux cas un devis séparant fourniture et pose, faute de quoi la comparaison est impossible, et mentionnant explicitement la sortie impulsion : un compteur d'eau standard n'en comporte pas, et sans elle rien ne remonte.")]),
-      p([nb("d.  Remontée des données. ", { bold: true }),
+         nb("Relever à chaque point le diamètre nominal, le type de raccord et la longueur droite disponible en amont et en aval, sans laquelle le compteur sort de sa classe de précision. Viser une classe R160 ou meilleure là où une détection de fuite est attendue : un compteur surdimensionné ne voit pas les petits débits, où se lisent les fuites.")]),
+      p([nb("c.  Achat et devis. ", { bold: true }),
+         nb("Décidé : l'ECAM achète le matériel, le plombier réalise la pose ; le devis demandé porte sur la seule intervention, que des fonds DAISI peuvent contribuer à financer. La spécification des compteurs nous incombe donc : compatibilité avec les diamètres relevés, avec les longueurs droites disponibles et avec les nœuds LoRaWAN. La sortie impulsion doit figurer explicitement à la commande — un compteur d'eau standard n'en comporte pas, et sans elle rien ne remonte.")]),
+      p([nb("d.  Contrainte majeure : la vidange complète. ", { bold: true }),
+         nb("Toute intervention impose de vidanger l'ECAM en totalité : il n'y aura pas de second passage pour compléter une pose oubliée. Le diagnostic doit donc être exhaustif, et chaque compteur encadré de deux vannes d'isolement — sans quoi son remplacement futur imposera une nouvelle vidange générale pour un seul appareil. Le surcoût est marginal au regard d'une vidange, et la décision se prend maintenant ou jamais. L'ECAM devant faire réintervenir le plombier pour le S3, synchroniser les deux interventions est l'occasion à saisir.")]),
+      p([nb("e.  Remontée des données. ", { bold: true }),
          nb("Collecter les relevés par LoRaWAN et les exploiter dans ChirpStack, pour la visualisation comme pour le paramétrage à distance des nœuds.")]),
 
       // ---------- 6 ----------
       h("6.  Questions ouvertes"),
       table([620, 4680, 4446], ["", "Question", "Pourquoi c'est bloquant"], [
         ["Q1", "Disposons-nous déjà de nœuds compteurs d'impulsions, ou seulement des passerelles ?", "Sans nœud, la campagne de mesures de novembre est impossible"],
-        ["Q2", "SC3 peut-il être posé en aval de la dérivation de l'entreprise tierce ?", "Détermine la nécessité d'un sixième compteur, donc le budget"],
+        ["Q2", "Le compteur de Maupertuis peut-il être posé en aval de la dérivation de l'entreprise tierce ?", "Détermine la nécessité d'un sixième compteur, donc le budget"],
         ["Q3", "SC5 remplace-t-il le compteur du distributeur, ou s'y ajoute-t-il ?", "Conditionne le recoupement des index avec la facture d'eau"],
         ["Q4", "La demande d'accès WiFi au service informatique est-elle déposée ?", "Chemin critique ; un refus impose du filaire ou de la 4G"],
-        ["Q5", "Quel budget est alloué, et qui passe commande ?", "La commande doit partir le 4 décembre au plus tard"],
-        ["Q6", "Les toilettes non équipées sont-elles identifiées et localisées ?", "Sans cela, le résidu ne peut pas être interprété"],
-        ["Q7", "Quelle précision est attendue sur le résidu ?", "Il cumule les erreurs des cinq compteurs, alors qu'il porte la détection de fuite"],
+        ["Q5", "Qui passe commande, sur quel budget, avec quel délai de validation ?", "Des fonds DAISI existent ; le circuit d'achat conditionne le délai de livraison"],
+        ["Q6", "Quelles dates de diagnostic et d'intervention ?", "Si l'intervention a lieu aux vacances de la Toussaint, tout doit être livré avant le 9 octobre"],
+        ["Q7", "Le S3 est-il inclus dans une zone comptée ?", "Sinon sa fuite n'est détectée que par différence, sans localisation"],
+        ["Q8", "Où et pourquoi la vanne V1 ?", "Absente de nos notes de cadrage initiales"],
       ], { petit: true, premierGras: true }),
 
       // ---------- 7 ----------
@@ -192,18 +197,16 @@ const doc = new Document({
       puce("Les trois passerelles sont raccordées de façon pérenne, sans partage de connexion téléphonique."),
       puce("Le bilan SC5 − (SC1 + SC2 + SC3 + SC4) est calculé et affiché, et son écart de bouclage est documenté et expliqué."),
       puce("Les paramètres des nœuds sont modifiables à distance depuis ChirpStack."),
-      puce("La procédure d'installation est documentée de façon à pouvoir être reproduite sur un autre site, conformément à l'objectif du projet DAISI."),
+      puce("La procédure d'installation est documentée de façon à être reproduite sur un autre site, conformément à l'objectif DAISI."),
 
       // ---------- Validation ----------
       h("8.  Validation"),
-      p("Le présent document restitue le cadrage donné oralement par les encadrants. Il appelle deux corrections, soumises à validation : le calcul du résidu ne porte que sur les quatre sous-compteurs de zone, SC5 étant l'arrivée générale ; et ce résidu agrège les fuites du réseau, ce pour quoi il n'est pas désigné comme la consommation des toilettes."),
-      new Paragraph({ spacing: { after: 100 }, children: [] }),
+      p("Ce document restitue le cadrage des encadrants et le mail du 14/09. Les points signalés en section 3 et les questions de la section 6 sont soumis à validation."),
       table([2400, 2900, 2200, 2246], ["Rôle", "Nom", "Date", "Visa"], [
-        ["Rédigé par", "", "", ""],
-        ["Vérifié par", "", "", ""],
+        ["Rédigé par", "Paul Thiboult et Lilian Grot", "", ""],
         ["Approuvé par", "Ivan Martinez", "", ""],
         ["Approuvé par", "Denys Boiteau", "", ""],
-      ], { premierGras: true, hauteur: 620 }),
+      ], { premierGras: true, hauteur: 330 }),
     ],
   }],
 });
