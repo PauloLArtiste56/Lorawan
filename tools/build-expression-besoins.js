@@ -12,7 +12,7 @@ const FOND_TETE = "0B5563", FOND_CLAIR = "EDF2F4", FOND_ALERTE = "FDF3E7";
 const nb = (t, o = {}) => new TextRun({ text: t, font: "Calibri", size: 18, color: ENCRE, ...o });
 const p = (t, o = {}) => new Paragraph({
   children: Array.isArray(t) ? t : [nb(t)],
-  spacing: { after: 70, line: 238 }, ...o,
+  spacing: { after: 66, line: 226 }, ...o,
 });
 
 function h(txt) {
@@ -141,9 +141,9 @@ const doc = new Document({
         ["SC1", "Annexe / NE", "A priori la cuisine et l'appartement"],
         ["SC2", "Cafétéria", "A priori le bar et les toilettes principales"],
         ["SC3", "S4", "Toilettes et lavabos des salles de TP"],
-        ["SC4", "Maupertuis (= S1)", "Comporte la dérivation d'une entreprise tierce"],
+        ["SC4", "S1 / Maupertuis", "Maupertuis est en série derrière le S1 et partage sa vanne de coupure"],
         ["SC5", "Arrivée générale de l'ECAM", "Index total télérelevé"],
-        ["V1", "Vanne d'isolement", "Une seule à poser ; les autres points sont déjà équipés"],
+        ["V1", "Vanne d'isolement du S4", "Aucune vanne n'isole le S4 aujourd'hui : c'est celle-là qu'il s'agit d'ajouter"],
       ], { premierGras: true, alerte: [3] }),
       p([nb("Les zones non équipées", { bold: true }), nb(" sont le S2, le S3, les toilettes de l'étage et un ou deux points d'eau supplémentaires : leur consommation est obtenue par différence, dans le résidu.")]),
 
@@ -160,14 +160,15 @@ const doc = new Document({
       ]),
       p([
         nb("Sensibilité de la détection. ", { bold: true }),
-        nb("Une fuite de 50 L/h est évidente dans un résidu qui vaut habituellement 20 L/h, mais se noie dans un résidu qui en vaut 400 : avec cinq à six zones agrégées, le total journalier ne permet plus de conclure. La parade est d'exploiter le "),
+        nb("Avec cinq à six zones agrégées, le total journalier ne permet plus de conclure : une fuite de 50 L/h se noie dans un résidu qui en vaut 400. La parade est d'exploiter le "),
         nb("minimum nocturne", { bold: true }),
-        nb(" : la nuit, ces zones sont inoccupées et leur consommation légitime doit tomber quasiment à zéro, donc un plancher nocturne qui ne descend pas signale une fuite quel que soit le nombre de zones. C'est ce qui justifie le relevé au pas horaire. Contrepartie assumée : le système détecte, un humain localise."),
+        nb(" : ces zones étant inoccupées la nuit, un plancher nocturne qui ne descend pas signale une fuite quel que soit le nombre de zones agrégées. C'est ce qui justifie le relevé au pas horaire. Contrepartie assumée : le système détecte, un humain localise."),
       ]),
       p([
-        nb("Consommation propre à l'ECAM : "),
-        nb("ECAM = SC5 − entreprise tierce", { bold: true }),
-        nb(". Plutôt que de soustraire cette consommation, poser le compteur en aval de la dérivation de sorte qu'il ne voie que l'ECAM : la soustraction disparaît."),
+        nb("Position du compteur SC4. ", { bold: true }),
+        nb("Maupertuis étant alimenté via le S1, poser SC4 "),
+        nb("en amont de la dérivation Maupertuis", { bold: true }),
+        nb(", de sorte qu'il mesure S1 et Maupertuis ensemble : le résidu reste exempt de toute consommation qu'on ne maîtrise pas. Posé en aval, il laisserait un tiers le polluer. Contrepartie : S1 et Maupertuis ne sont plus distingués."),
       ]),
 
       // ---------- 5 ----------
@@ -175,7 +176,7 @@ const doc = new Document({
       p([nb("a.  Étude de propagation et placement des passerelles. ", { bold: true }),
          nb("Positionner les trois passerelles de sorte que les cinq sous-compteurs remontent de façon fiable ; produire le schéma de propagation. Raccordement : le WiFi de l'ECAM pour l'exploitation, le partage de connexion téléphonique pour la seule campagne de mesures. Une passerelle en exploitation devant rester connectée en permanence, la demande d'accès est à déposer dès septembre ; un refus imposerait du filaire ou de la 4G.")]),
       p([nb("b.  Relevé des canalisations. ", { bold: true }),
-         nb("Relever à chaque point le diamètre nominal, le type de raccord et la longueur droite disponible en amont et en aval, sans laquelle le compteur sort de sa classe de précision. Viser une classe R160 ou meilleure là où une détection de fuite est attendue : un compteur surdimensionné ne voit pas les petits débits, où se lisent les fuites.")]),
+         nb("Relever à chaque point le diamètre nominal, le type de raccord et la longueur droite disponible en amont et en aval, sans laquelle le compteur sort de sa classe de précision. Viser une classe R160 ou meilleure : un compteur surdimensionné ne voit pas les petits débits, où se lisent les fuites.")]),
       p([nb("c.  Achat et devis. ", { bold: true }),
          nb("Décidé : l'ECAM achète le matériel, le plombier pose ; le devis porte sur la seule intervention, que des fonds DAISI peuvent financer. La spécification des compteurs nous incombe donc : diamètres relevés, longueurs droites disponibles, compatibilité avec les nœuds LoRaWAN. La sortie impulsion doit figurer explicitement à la commande — un compteur standard n'en comporte pas, et sans elle rien ne remonte.")]),
       p([nb("d.  Contrainte majeure : la vidange complète. ", { bold: true }),
@@ -206,7 +207,7 @@ const doc = new Document({
 
       // ---------- Validation ----------
       h("8.  Validation"),
-      p("Ce document restitue le cadrage des encadrants et le mail du 14/09. Les points signalés en section 3 et les questions de la section 6 sont soumis à validation."),
+      p("Les points signalés en section 3 et les questions de la section 6 sont soumis à validation."),
       table([2400, 2900, 2200, 2246], ["Rôle", "Nom", "Date", "Visa"], [
         ["Rédigé par", "Paul Thiboult et Lilian Grot", "", ""],
         ["Approuvé par", "Ivan Martinez", "", ""],

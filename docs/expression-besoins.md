@@ -38,14 +38,31 @@ l'arrivée générale**.
 | **SC1** | Annexe / NE | Correspond a priori à la cuisine et à l'appartement |
 | **SC2** | Cafétéria | Correspond a priori au bar et aux toilettes principales |
 | **SC3** | S4 | Toilettes et lavabos des salles de TP |
-| **SC4** | Maupertuis (= S1) | Comporte la dérivation d'une **entreprise tierce** |
+| **SC4** | S1 / Maupertuis | Maupertuis est **en série derrière le S1** et partage sa vanne de coupure. Position du compteur à arrêter : voir ci-dessous |
 | **SC5** | Arrivée générale de l'ECAM | Index total télérelevé |
-| **V1** | Vanne d'isolement | Une seule à poser ; les autres points sont déjà équipés en amont ou en aval |
+| **V1** | Vanne d'isolement du **S4** | **Aucune vanne n'isole le S4 aujourd'hui** : c'est celle-là qu'il s'agit d'ajouter. Les autres points sont déjà équipés |
 
-Les zones non équipées sont le **S2**, le **S3**, les **toilettes de l'étage** et
-un ou deux points d'eau supplémentaires : leur consommation est obtenue par
-différence, dans le résidu. C'est le cas de l'écoulement constant constaté dans
-les toilettes du S3, à l'origine du projet.
+Les zones non équipées sont le **S2**, le **S3**, les **toilettes de l'étage**
+(repérées sur le plan d'étage, desservies avec une fontaine à eau par la vanne
+repérée 8) et un ou deux points d'eau supplémentaires. Leur consommation est
+obtenue par différence, dans le résidu — dont l'écoulement constant constaté
+dans les toilettes du S3, à l'origine du projet.
+
+### Où poser le compteur SC4 : trois options, une seule bonne
+
+Maupertuis étant alimenté via le S1, la position du compteur sur cette branche
+détermine ce qui est mesuré et ce qui tombe dans le résidu.
+
+| Position | Mesure | Conséquence sur le résidu |
+|----------|--------|---------------------------|
+| **En amont de la dérivation Maupertuis** | S1 + Maupertuis | Résidu propre : ni l'un ni l'autre n'y figure |
+| En aval de la dérivation, sur le S1 seul | S1 seul | ⚠️ Maupertuis, donc un tiers, tombe dans le résidu et pollue la détection de fuite |
+| Sur la dérivation Maupertuis seule | Maupertuis seul | ⚠️ Le S1 entier tombe dans le résidu |
+
+**La première option est la bonne** pour l'objectif du projet : elle garde le
+résidu exempt de toute consommation qu'on ne maîtrise pas. Son coût est qu'on ne
+distingue plus la consommation propre du S1 de celle de Maupertuis — à accepter
+explicitement, sauf si un décompte séparé du tiers est attendu.
 
 ### Topologie
 
