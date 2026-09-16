@@ -129,7 +129,7 @@ const doc = new Document({
       h("2.  Moyens disponibles"),
       table([3300, 2100, 4346], ["Élément", "Quantité", "État"], [
         ["Passerelles LoRaWAN", "3", "Déjà disponibles"],
-        ["Sous-compteurs d'eau", "4", "À acheter ; arrivée générale non prévue"],
+        ["Sous-compteurs d'eau", "4", "À acheter, plus la télérelève de l'arrivée générale"],
         ["Nœuds compteurs d'impulsions", "À confirmer", "Voir question Q1"],
         ["Serveur de réseau", "ChirpStack", "Décidé"],
       ], { premierGras: true }),
@@ -142,7 +142,7 @@ const doc = new Document({
         ["SC2", "Cafétéria", "A priori le bar et les toilettes principales"],
         ["SC3", "S4", "Toilettes et lavabos des salles de TP"],
         ["SC4", "S1 / Maupertuis", "Maupertuis est en série derrière le S1 et partage sa vanne de coupure"],
-        ["SC5", "Arrivée générale de l'ECAM", "NON INSTALLÉE À CE JOUR — sans elle, le résidu n'est pas calculable"],
+        ["SC5", "Arrivée générale de l'ECAM", "Déjà comptée par le distributeur, mais sans remontée : télérelève à ajouter"],
         ["V1", "Vanne d'isolement du S4", "Aucune vanne n'isole le S4 aujourd'hui : c'est celle-là qu'il s'agit d'ajouter"],
       ], { premierGras: true, alerte: [3, 4] }),
       p([nb("Les zones non équipées", { bold: true }), nb(" sont le S2, le S3, les toilettes de l'étage et un ou deux points d'eau supplémentaires : leur consommation est obtenue par différence, dans le résidu.")]),
@@ -159,10 +159,10 @@ const doc = new Document({
         nb(" : il agrège le S2, le S3, les toilettes de l'étage, un ou deux points d'eau supplémentaires, les usages divers non comptés et les fuites du réseau. Il est donc désigné « non sous-compté » dans ChirpStack et dans les rapports."),
       ]),
       p([
-        nb("Sans compteur sur l'arrivée générale, ce résidu n'existe pas. ", { bold: true }),
-        nb("La formule n'a alors pas de premier terme. Restent possibles le suivi horaire des quatre zones comptées et le recoupement d'un total mensuel avec la facture ; devient impossible la détection d'une fuite dans le S2, le S3, l'étage ou les autres points non comptés — donc "),
-        nb("l'écoulement constant du S3, à l'origine du projet, resterait indétectable automatiquement", { bold: true }),
-        nb(". Équiper l'arrivée générale conditionne la moitié de l'objectif ; à défaut, il faut l'assumer dans les critères de réussite."),
+        nb("Récupérer l'index de l'arrivée générale. ", { bold: true }),
+        nb("Elle est déjà comptée, mais par le compteur du distributeur, qui ne remonte rien vers l'ECAM. Sans cet index au pas horaire, le résidu n'est pas calculable et aucune fuite n'est décelable dans le S2, le S3 ou l'étage. Deux voies : un module de télérelève clipsé sur le compteur du distributeur — le moins cher, mais il lui appartient et il est plombé, son accord est nécessaire ; ou "),
+        nb("un compteur propre à l'ECAM posé juste en aval", { bold: true }),
+        nb(", seule voie sans dépendance, à décider pendant cette intervention. Exiger le poids d'impulsion le plus fin : il fixe la résolution du débit horaire, donc la plus petite fuite décelable."),
       ]),
       p([
         nb("Méthode de détection. ", { bold: true }),
@@ -186,29 +186,28 @@ const doc = new Document({
       p([nb("c.  Achat et devis. ", { bold: true }),
          nb("Décidé : l'ECAM achète le matériel, le plombier pose ; des fonds DAISI peuvent financer l'intervention. La spécification des compteurs nous incombe donc. La sortie impulsion doit figurer explicitement à la commande — un compteur standard n'en comporte pas, et sans elle rien ne remonte.")]),
       p([nb("d.  Contrainte majeure : la vidange complète. ", { bold: true }),
-         nb("Toute intervention impose de vidanger l'ECAM en totalité : pas de second passage pour compléter une pose oubliée, d'où l'exigence d'un diagnostic exhaustif. Les vannes d'isolement sont déjà en place sur les points existants ; seule celle du S4 reste à poser. L'ECAM devant faire réintervenir le plombier pour le S3, synchroniser les deux interventions est l'occasion à saisir.")]),
+         nb("Toute intervention impose de vidanger l'ECAM en totalité : pas de second passage pour compléter une pose oubliée, d'où l'exigence d'un diagnostic exhaustif. Les vannes d'isolement sont déjà en place sur les points existants ; seule celle du S4 reste à poser. L'ECAM devant faire réintervenir le plombier pour le S3, synchroniser les deux interventions s'impose.")]),
       p([nb("e.  Remontée des données. ", { bold: true }),
-         nb("Collecter les relevés par LoRaWAN et les exploiter dans ChirpStack, pour la visualisation comme pour le paramétrage à distance des nœuds.")]),
+         nb("Collecter les relevés par LoRaWAN et les exploiter dans ChirpStack, visualisation et paramétrage à distance compris.")]),
 
       // ---------- 6 ----------
       h("6.  Questions ouvertes"),
       table([620, 4680, 4446], ["", "Question", "Pourquoi c'est bloquant"], [
         ["Q1", "Disposons-nous de nœuds compteurs d'impulsions ?", "Sans nœud, la campagne de mesures de novembre est impossible"],
         ["Q2", "SC4 est-il posé en amont de la dérivation Maupertuis ?", "Seule position qui garde le résidu exempt de la consommation d'un tiers"],
-        ["Q3", "L'arrivée générale sera-t-elle équipée, dans cette intervention ?", "Sans elle, aucune fuite n'est détectable dans les zones non comptées, dont le S3"],
+        ["Q3", "Index de l'arrivée générale : module clipsé ou compteur propre en aval ?", "Le distributeur doit donner son accord pour un module sur son compteur"],
         ["Q4", "La demande d'accès WiFi est-elle déposée ?", "Chemin critique ; un refus impose du filaire ou de la 4G"],
         ["Q5", "Qui commande, sur quel budget et dans quel délai ?", "Des fonds DAISI existent ; le circuit d'achat conditionne la livraison"],
         ["Q6", "Quelles dates de diagnostic et d'intervention ?", "Si l'intervention a lieu aux vacances de la Toussaint, tout doit être livré avant le 9 octobre"],
         ["Q7", "Le suivi du minimum nocturne est-il retenu comme méthode de détection ?", "Seule méthode restant sensible malgré l'agrégation de cinq à six zones"],
-        ["Q8", "Quelle précision est attendue sur le résidu ?", "Il cumule les erreurs de tous les compteurs"],
-        ["Q9", "La vanne V1 sera-t-elle posée en amont du compteur SC3 ?", "En amont, le compteur du S4 pourra être déposé sans nouvelle vidange"],
+        ["Q8", "La vanne V1 sera-t-elle posée en amont du compteur SC3 ?", "En amont, le compteur du S4 pourra être déposé sans nouvelle vidange"],
       ], { petit: true, premierGras: true }),
 
       // ---------- 7 ----------
       h("7.  Critères de réussite proposés"),
       puce("Les sous-compteurs posés remontent un index au pas horaire dans ChirpStack, avec un taux de messages reçus supérieur à 95 % sur quinze jours consécutifs."),
       puce("Les trois passerelles sont raccordées de façon pérenne, sans partage de connexion téléphonique."),
-      puce("Si l'arrivée générale est équipée : le bilan SC5 − (SC1 + SC2 + SC3 + SC4) est calculé et affiché, et son écart de bouclage documenté."),
+      puce("L'index de l'arrivée générale est remonté au pas horaire, le bilan SC5 − (SC1 + SC2 + SC3 + SC4) est calculé et affiché, et son écart de bouclage documenté."),
       puce("Les paramètres des nœuds sont modifiables à distance depuis ChirpStack."),
       puce("La procédure d'installation est documentée de façon à être reproduite sur un autre site, conformément à l'objectif DAISI."),
 

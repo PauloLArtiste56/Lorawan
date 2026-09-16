@@ -63,6 +63,16 @@ point**. Version tableur : [`grille-diagnostic-plombier.csv`](grille-diagnostic-
 | Local enterré ? Murs béton ? Trappe métallique ? | | **Détermine la difficulté de la liaison radio** |
 | Point d'alimentation électrique à proximité | | Utile si un nœud secteur est envisagé |
 
+### Arrivée générale uniquement — compteur du distributeur
+
+| Information | Valeur | Pourquoi |
+|-------------|--------|----------|
+| Marque et modèle du compteur en place | | Détermine s'il existe un module de télérelève compatible |
+| Registre **pré-équipé** pour une tête émettrice ? | Oui / Non | Si oui, la solution la moins chère est possible |
+| Poids d'impulsion disponible | | Fixe la résolution du débit horaire, donc la plus petite fuite décelable. Demander le plus fin |
+| Compteur plombé ? Numéro de plomb | | Il appartient au distributeur : toute pose dessus exige son accord |
+| Place disponible en aval pour un compteur propre à l'ECAM | | Solution de repli si le distributeur refuse |
+
 ### Relevé radio — à faire par nous, pas par le plombier
 
 | Information | Valeur |

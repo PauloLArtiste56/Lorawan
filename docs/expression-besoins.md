@@ -39,7 +39,7 @@ l'arrivée générale**.
 | **SC2** | Cafétéria | Correspond a priori au bar et aux toilettes principales |
 | **SC3** | S4 | Toilettes et lavabos des salles de TP |
 | **SC4** | S1 / Maupertuis | Maupertuis est **en série derrière le S1** et partage sa vanne de coupure. Position du compteur à arrêter : voir ci-dessous |
-| **SC5** | Arrivée générale de l'ECAM | ⚠️ **Non installé à ce jour.** Sans lui, le résidu n'est pas calculable |
+| **SC5** | Arrivée générale de l'ECAM | Déjà comptée par le **compteur du distributeur**, mais sans remontée vers l'ECAM. ⚠️ Télérelève à ajouter |
 | **V1** | Vanne d'isolement du **S4** | **Aucune vanne n'isole le S4 aujourd'hui** : c'est celle-là qu'il s'agit d'ajouter. Les autres points sont déjà équipés |
 
 Les zones non équipées sont le **S2**, le **S3**, les **toilettes de l'étage**
@@ -100,25 +100,40 @@ de zone :
 Résidu = SC5 − (SC1 + SC2 + SC3 + SC4)
 ```
 
-#### ⚠️ Sans SC5, le résidu n'existe pas
+#### Récupérer l'index de l'arrivée générale
 
-L'arrivée générale n'étant pas équipée à ce jour, cette formule n'a pas de
-premier terme. Les conséquences sont directes :
+L'arrivée générale **est déjà comptée**, mais par le compteur du distributeur,
+qui ne remonte rien vers l'ECAM. Sans cet index au pas horaire, le résidu n'est
+pas calculable, et aucune fuite n'est décelable dans le S2, le S3 ou l'étage —
+c'est-à-dire précisément là où se situait l'écoulement qui a motivé le projet.
+Trois voies possibles :
 
-| Ce qui reste possible | Ce qui devient impossible |
-|-----------------------|---------------------------|
-| Suivre au pas horaire les quatre zones comptées, et y détecter une fuite par le minimum nocturne | Calculer le résidu au pas horaire |
-| Comparer les zones entre elles et identifier les gros postes | **Détecter une fuite dans le S2, le S3, l'étage ou les autres points non comptés** |
-| Recouper un total mensuel avec la facture d'eau | Appliquer le minimum nocturne à ces zones |
+| Voie | Avantage | Limite |
+|------|----------|--------|
+| **Module de télérelève clipsé** sur le compteur du distributeur | Aucune intervention de plomberie | ⚠️ Le compteur appartient au distributeur et il est plombé : son accord est nécessaire. En cas de renouvellement de son parc, le module peut devenir incompatible |
+| **Lecture optique** du cadran | Sans contact, sans accord | Dérive, encrassement, calage : peu fiable dans la durée |
+| **Compteur propre à l'ECAM posé juste en aval** | Aucune dépendance, sortie impulsion choisie librement | Un compteur et une pose de plus, à faire pendant cette intervention |
 
-Autrement dit : **l'écoulement constant du S3, qui est à l'origine du projet,
-resterait indétectable automatiquement.** Le compteur du distributeur ne fournit
-qu'un index relevé à la période de facturation, très loin du pas horaire que
-suppose l'analyse du plancher nocturne.
+**La troisième voie est la plus sûre**, et la contrainte de vidange plaide pour
+la décider maintenant. La première est la moins chère et mérite d'être tentée en
+premier, en commençant par relever la marque, le modèle et la présence d'un
+registre pré-équipé sur le compteur existant.
 
-Équiper l'arrivée générale conditionne donc la moitié de l'objectif. À défaut,
-il faut l'assumer explicitement dans les critères de réussite et annoncer que la
-détection ne couvre que les quatre zones comptées.
+##### Le poids d'impulsion détermine la plus petite fuite décelable
+
+Avec un poids d'impulsion de *P* litres, la résolution du débit horaire est de
+*P* L/h ; moyennée sur une nuit de huit heures, elle descend à *P*/8.
+
+| Poids d'impulsion | Résolution horaire | Moyennée sur 8 h |
+|-------------------|--------------------|------------------|
+| 10 L | 10 L/h | ≈ 1,3 L/h |
+| 100 L | 100 L/h | ≈ 12,5 L/h |
+
+Sur une arrivée générale de gros diamètre, le poids proposé par défaut est
+souvent de 100 L. Cela reste exploitable **à condition de raisonner sur la
+moyenne nocturne** et non heure par heure. Demander malgré tout le poids le plus
+fin disponible : il ne coûte généralement rien et conditionne toute la
+sensibilité du dispositif.
 
 ⚠️ **Et ce résidu n'est pas « la consommation des toilettes ».** C'est tout ce
 qui n'est pas sous-compté, c'est-à-dire :
@@ -275,7 +290,7 @@ disponibilité des nœuds compteurs d'impulsions (question Q1).
 |---|----------|-------------------------|
 | Q1 | Disposons-nous déjà des **nœuds LoRaWAN compteurs d'impulsions**, ou seulement des passerelles ? | Sans nœud, la campagne de mesures de novembre est impossible. À commander immédiatement le cas échéant. |
 | Q2 | SC4 est-il posé **en amont de la dérivation Maupertuis**, mesurant S1 et Maupertuis ensemble ? | Seule position qui garde le résidu exempt de la consommation d'un tiers. |
-| Q3 | **L'arrivée générale sera-t-elle équipée, et dans cette intervention ?** | Sans SC5, aucune fuite n'est détectable dans les zones non comptées — dont le S3. Question la plus structurante du projet. |
+| Q3 | **Comment récupérer l'index de l'arrivée générale** : module clipsé sur le compteur du distributeur, ou compteur propre posé en aval ? | Le distributeur doit donner son accord pour la première voie. Sans cet index, aucune fuite n'est détectable dans les zones non comptées, dont le S3. |
 | Q4 | La demande d'accès WiFi au service informatique est-elle déposée ? | Sur le chemin critique ; un refus impose une solution filaire ou 4G à budgéter. |
 | Q5 | Qui passe commande, sur quel budget, avec quel délai de validation ? | Des fonds DAISI existent ; le circuit d'achat conditionne le délai de livraison. |
 | Q8 | Quelle **date d'intervention** et quelle **date de diagnostic** ? | Si l'intervention a lieu aux vacances de la Toussaint, tout doit être livré avant le 09/10. |
@@ -293,8 +308,9 @@ disponibilité des nœuds compteurs d'impulsions (question Q1).
    avec un taux de messages reçus supérieur à 95 % sur quinze jours consécutifs.
 2. Les trois passerelles sont raccordées de façon pérenne, sans partage de
    connexion téléphonique.
-3. Si l'arrivée générale est équipée : le bilan `SC5 − (SC1 + SC2 + SC3 + SC4)`
-   est calculé et affiché, et son écart de bouclage documenté.
+3. L'index de l'arrivée générale est remonté au pas horaire, le bilan
+   `SC5 − (SC1 + SC2 + SC3 + SC4)` est calculé et affiché, et son écart de
+   bouclage documenté.
 4. Les paramètres des nœuds sont modifiables à distance depuis ChirpStack.
 5. La procédure d'installation est documentée de façon à être reproduite sur un
    autre site, conformément à l'objectif du projet DAISI.
