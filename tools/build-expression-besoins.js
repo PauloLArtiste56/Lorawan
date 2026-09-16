@@ -123,7 +123,7 @@ const doc = new Document({
 
       // ---------- 1 ----------
       h("1.  Besoin"),
-      p("Mesurer et suivre la consommation d'eau de l'ECAM par zone d'usage, afin d'identifier les postes de consommation et de détecter les dérives. Les relevés sont transmis par LoRaWAN et exploités dans ChirpStack, pour la visualisation comme pour le paramétrage des nœuds."),
+      p("Mesurer et suivre la consommation d'eau de l'ECAM par zone d'usage, afin d'identifier les postes de consommation et de détecter les fuites. Les relevés sont transmis par LoRaWAN et exploités dans ChirpStack."),
 
       // ---------- 2 ----------
       h("2.  Moyens disponibles"),
@@ -133,7 +133,6 @@ const doc = new Document({
         ["Nœuds compteurs d'impulsions", "À confirmer", "Voir question Q1"],
         ["Serveur de réseau", "ChirpStack", "Décidé"],
       ], { premierGras: true }),
-      p("Trois passerelles pour cinq points de comptage autorisent de la redondance radio : la contrainte porte sur le placement, non sur la couverture."),
 
       // ---------- 3 ----------
       h("3.  Périmètre : affectation des sous-compteurs"),
@@ -146,7 +145,7 @@ const doc = new Document({
         ["SC5", "Arrivée générale de l'ECAM", "Index total télérelevé"],
         ["V1", "Vanne d'isolement", "Une seule à poser ; les autres points sont déjà équipés"],
       ], { premierGras: true, alerte: [3] }),
-      p([nb("Le S2 et le S3 ne sont pas équipés", { bold: true }), nb(" : leur consommation est obtenue par différence, dans le résidu. C'est le cas de l'écoulement constant du S3, à l'origine du projet — détecté, mais non localisé entre les deux zones.")]),
+      p([nb("Les zones non équipées", { bold: true }), nb(" sont le S2, le S3, les toilettes de l'étage et un ou deux points d'eau supplémentaires : leur consommation est obtenue par différence, dans le résidu.")]),
 
       // ---------- 4 ----------
       h("4.  Calcul du poste non sous-compté"),
@@ -157,22 +156,28 @@ const doc = new Document({
       p([
         nb("SC5 étant l'arrivée générale, la formule ne porte que sur les quatre sous-compteurs de zone. "),
         nb("Ce résidu n'est pas la consommation des toilettes", { bold: true }),
-        nb(" : il agrège le S2 et le S3, non équipés, les usages divers non comptés et les fuites du réseau. Il est donc désigné « non sous-compté » dans ChirpStack et dans les rapports. Un résidu qui ne redescend pas la nuit signale une fuite, et non un usage — c'est précisément ce que le projet doit détecter."),
+        nb(" : il agrège le S2, le S3, les toilettes de l'étage, un ou deux points d'eau supplémentaires, les usages divers non comptés et les fuites du réseau. Il est donc désigné « non sous-compté » dans ChirpStack et dans les rapports."),
+      ]),
+      p([
+        nb("Sensibilité de la détection. ", { bold: true }),
+        nb("Une fuite de 50 L/h est évidente dans un résidu qui vaut habituellement 20 L/h, mais se noie dans un résidu qui en vaut 400 : avec cinq à six zones agrégées, le total journalier ne permet plus de conclure. La parade est d'exploiter le "),
+        nb("minimum nocturne", { bold: true }),
+        nb(" : la nuit, ces zones sont inoccupées et leur consommation légitime doit tomber quasiment à zéro, donc un plancher nocturne qui ne descend pas signale une fuite quel que soit le nombre de zones. C'est ce qui justifie le relevé au pas horaire. Contrepartie assumée : le système détecte, un humain localise."),
       ]),
       p([
         nb("Consommation propre à l'ECAM : "),
         nb("ECAM = SC5 − entreprise tierce", { bold: true }),
-        nb(". Plutôt que de soustraire cette consommation, qu'il faudrait connaître, poser le compteur en aval de la dérivation de sorte qu'il ne voie que l'ECAM : la soustraction disparaît. À défaut, un sixième compteur est nécessaire."),
+        nb(". Plutôt que de soustraire cette consommation, poser le compteur en aval de la dérivation de sorte qu'il ne voie que l'ECAM : la soustraction disparaît."),
       ]),
 
       // ---------- 5 ----------
       h("5.  Travaux à mener"),
       p([nb("a.  Étude de propagation et placement des passerelles. ", { bold: true }),
-         nb("Positionner les trois passerelles de sorte que les cinq sous-compteurs remontent leurs données de façon fiable ; produire le schéma de propagation. Raccordement réseau : le WiFi de l'ECAM pour l'exploitation, le partage de connexion téléphonique pour la seule campagne de mesures. Une passerelle en exploitation devant rester connectée en permanence, la demande d'accès est à déposer dès septembre ; un refus imposerait du filaire ou de la 4G, à budgéter.")]),
+         nb("Positionner les trois passerelles de sorte que les cinq sous-compteurs remontent de façon fiable ; produire le schéma de propagation. Raccordement : le WiFi de l'ECAM pour l'exploitation, le partage de connexion téléphonique pour la seule campagne de mesures. Une passerelle en exploitation devant rester connectée en permanence, la demande d'accès est à déposer dès septembre ; un refus imposerait du filaire ou de la 4G.")]),
       p([nb("b.  Relevé des canalisations. ", { bold: true }),
          nb("Relever à chaque point le diamètre nominal, le type de raccord et la longueur droite disponible en amont et en aval, sans laquelle le compteur sort de sa classe de précision. Viser une classe R160 ou meilleure là où une détection de fuite est attendue : un compteur surdimensionné ne voit pas les petits débits, où se lisent les fuites.")]),
       p([nb("c.  Achat et devis. ", { bold: true }),
-         nb("Décidé : l'ECAM achète le matériel, le plombier réalise la pose ; le devis demandé porte sur la seule intervention, que des fonds DAISI peuvent contribuer à financer. La spécification des compteurs nous incombe donc : compatibilité avec les diamètres relevés, avec les longueurs droites disponibles et avec les nœuds LoRaWAN. La sortie impulsion doit figurer explicitement à la commande — un compteur d'eau standard n'en comporte pas, et sans elle rien ne remonte.")]),
+         nb("Décidé : l'ECAM achète le matériel, le plombier pose ; le devis porte sur la seule intervention, que des fonds DAISI peuvent financer. La spécification des compteurs nous incombe donc : diamètres relevés, longueurs droites disponibles, compatibilité avec les nœuds LoRaWAN. La sortie impulsion doit figurer explicitement à la commande — un compteur standard n'en comporte pas, et sans elle rien ne remonte.")]),
       p([nb("d.  Contrainte majeure : la vidange complète. ", { bold: true }),
          nb("Toute intervention impose de vidanger l'ECAM en totalité : pas de second passage pour compléter une pose oubliée, d'où l'exigence d'un diagnostic exhaustif. Les vannes d'isolement sont déjà en place sur les points existants ; une seule reste à poser. Relever toutefois de quel côté se trouve chaque vanne : d'un seul côté, elle ne permet pas de déposer le compteur sans vidanger la portion opposée. L'ECAM devant faire réintervenir le plombier pour le S3, synchroniser les deux interventions est l'occasion à saisir.")]),
       p([nb("e.  Remontée des données. ", { bold: true }),
@@ -187,7 +192,7 @@ const doc = new Document({
         ["Q4", "La demande d'accès WiFi au service informatique est-elle déposée ?", "Chemin critique ; un refus impose du filaire ou de la 4G"],
         ["Q5", "Qui passe commande, sur quel budget, avec quel délai de validation ?", "Des fonds DAISI existent ; le circuit d'achat conditionne le délai de livraison"],
         ["Q6", "Quelles dates de diagnostic et d'intervention ?", "Si l'intervention a lieu aux vacances de la Toussaint, tout doit être livré avant le 9 octobre"],
-        ["Q7", "Est-il acceptable que le S2 et le S3 ne soient pas distingués dans le résidu ?", "Une fuite y est détectée, mais non localisée entre les deux zones"],
+        ["Q7", "Le suivi du minimum nocturne est-il retenu comme méthode de détection ?", "Seule méthode restant sensible malgré l'agrégation de cinq à six zones"],
         ["Q8", "Quelle précision est attendue sur le résidu ?", "Il cumule les erreurs des cinq compteurs, alors qu'il porte la détection de fuite"],
       ], { petit: true, premierGras: true }),
 

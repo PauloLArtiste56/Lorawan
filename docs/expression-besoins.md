@@ -42,10 +42,10 @@ l'arrivée générale**.
 | **SC5** | Arrivée générale de l'ECAM | Index total télérelevé |
 | **V1** | Vanne d'isolement | Une seule à poser ; les autres points sont déjà équipés en amont ou en aval |
 
-Le **S2 et le S3 ne sont pas équipés** : leur consommation est obtenue par
-différence, dans le résidu. C'est notamment le cas de l'écoulement constant
-constaté dans les toilettes du S3, à l'origine du projet — il serait donc
-**détecté**, mais **non localisé** entre les deux zones.
+Les zones non équipées sont le **S2**, le **S3**, les **toilettes de l'étage** et
+un ou deux points d'eau supplémentaires : leur consommation est obtenue par
+différence, dans le résidu. C'est le cas de l'écoulement constant constaté dans
+les toilettes du S3, à l'origine du projet.
 
 ### Topologie
 
@@ -87,10 +87,27 @@ Résidu = SC5 − (SC1 + SC2 + SC3 + SC4)
 qui n'est pas sous-compté, c'est-à-dire :
 
 ```
-Résidu = S2 + S3  (non équipés)
+Résidu = S2 + S3
+       + toilettes de l'étage
+       + 1 ou 2 points d'eau supplémentaires
        + usages divers non comptés
        + FUITES du réseau
 ```
+
+⚠️ **Le nombre de zones agrégées limite la sensibilité de la détection.** Une
+fuite de 50 L/h est évidente dans un résidu qui vaut habituellement 20 L/h ; elle
+se noie dans un résidu qui en vaut 400. Avec cinq ou six zones regroupées, le
+total journalier ne permet plus de conclure.
+
+**La parade est d'exploiter le minimum nocturne plutôt que le total journalier.**
+La nuit, toutes ces zones sont inoccupées : leur consommation légitime doit
+tomber quasiment à zéro. Un plancher nocturne qui ne descend pas signale une
+fuite, quel que soit le nombre de zones agrégées. C'est la méthode usuelle en
+recherche de fuite sur réseau, et c'est ce qui justifie le relevé au pas horaire.
+
+Contrepartie à assumer : le système **détecte** la fuite, un humain la
+**localise** en parcourant les zones concernées. Avec le découpage retenu, aucune
+localisation automatique n'est possible à l'intérieur du résidu.
 
 Cette distinction n'est pas un détail de vocabulaire : c'est le cœur de la
 valeur du projet. Un résidu qui augmente sans que la fréquentation change, ou
@@ -220,7 +237,7 @@ disponibilité des nœuds compteurs d'impulsions (question Q1).
 | Q4 | La demande d'accès WiFi au service informatique est-elle déposée ? | Sur le chemin critique ; un refus impose une solution filaire ou 4G à budgéter. |
 | Q5 | Qui passe commande, sur quel budget, avec quel délai de validation ? | Des fonds DAISI existent ; le circuit d'achat conditionne le délai de livraison. |
 | Q8 | Quelle **date d'intervention** et quelle **date de diagnostic** ? | Si l'intervention a lieu aux vacances de la Toussaint, tout doit être livré avant le 09/10. |
-| Q9 | Est-il acceptable que le S2 et le S3 ne soient pas distingués l'un de l'autre dans le résidu ? | Une fuite y est détectée mais non localisée entre les deux zones. |
+| Q9 | Le suivi du **minimum nocturne** du résidu est-il retenu comme méthode de détection ? | C'est la seule qui reste sensible malgré l'agrégation de cinq à six zones. La localisation resterait manuelle. |
 | ~~Q10~~ | ~~Où et pourquoi la vanne V1 ?~~ | ✅ Tranchée : vanne d'isolement, une seule à poser. |
 | ~~Q6~~ | ~~Les zones non équipées sont-elles identifiées ?~~ | ✅ Tranchée : le résidu couvre le S2 et le S3. |
 | Q7 | Quelle **précision attendue** sur le résidu ? | Le résidu cumule les erreurs des cinq compteurs : c'est la grandeur la moins précise du système, alors que c'est celle qui porte la détection de fuite. |
