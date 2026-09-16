@@ -30,7 +30,7 @@ de données de consommation d'énergie.*
 
 | # | Livrable | État | Où |
 |---|----------|------|-----|
-| G1 | Cahier des charges / expression des besoins | 🟡 rédigé, à valider le 18/09 | [`expression-besoins.md`](expression-besoins.md) |
+| G1 | Cahier des charges / expression des besoins | 🟡 **version finale relue par l'équipe**, à valider le 18/09 | [`Expression-des-besoins.docx`](Expression-des-besoins.docx) fait foi ; [`expression-besoins.md`](expression-besoins.md) garde le détail de travail |
 | G2 | Objectifs, périmètre et critères de réussite | 🟡 amorcé | [`expression-besoins.md`](expression-besoins.md#7-critères-de-réussite-proposés-livrable-g2) |
 | G3 | Planning et jalons | 🟢 fait | [`planning-180h.md`](planning-180h.md), [`seances.csv`](seances.csv) |
 | G4 | Répartition des rôles et responsabilités | 🟡 amorcé | Équipe de deux : Paul Thiboult et Lilian Grot |

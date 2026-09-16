@@ -44,7 +44,7 @@ base de données, on ne peut pas distinguer ce qui est à intégrer de ce qui es
 | Document | Contenu |
 |----------|---------|
 | [`docs/expression-besoins.md`](docs/expression-besoins.md) | **Expression des besoins (G1)** : les 5 points de comptage, le calcul du résidu, les questions ouvertes |
-| [`docs/Expression-des-besoins.docx`](docs/Expression-des-besoins.docx) | La même, en Word sur 2 pages, à faire signer — régénérable via `tools/build-expression-besoins.js` |
+| [`docs/Expression-des-besoins.docx`](docs/Expression-des-besoins.docx) | **Version finale relue par l'équipe**, sur 2 pages, à faire signer. Fait foi ; `tools/build-expression-besoins.js` la reproduit à l'identique |
 | [`docs/reunion-2026-09-17.md`](docs/reunion-2026-09-17.md) | **Prépa 17/09** — réunion bâtiment : dates, accès aux locaux, plans |
 | [`docs/reunion-2026-09-18.md`](docs/reunion-2026-09-18.md) | **Prépa 18/09** — revue avec les encadrants : validation du G1, arbitrages |
 | [`docs/grille-diagnostic-plombier.md`](docs/grille-diagnostic-plombier.md) | Grille de relevé pour le diagnostic du plombier |

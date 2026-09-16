@@ -36,10 +36,10 @@ l'arrivée générale**.
 | Repère | Zone couverte | Particularité |
 |--------|---------------|---------------|
 | **SC1** | Annexe / NE | Correspond a priori à la cuisine et à l'appartement |
-| **SC2** | Cafétéria | Correspond a priori au bar et aux toilettes principales |
+| **SC2** | Ve + toilettes | |
 | **SC3** | S4 | Toilettes et lavabos des salles de TP |
 | **SC4** | S1 / Maupertuis | Maupertuis est **en série derrière le S1** et partage sa vanne de coupure. Position du compteur à arrêter : voir ci-dessous |
-| **SC5** | Arrivée générale de l'ECAM | Déjà comptée par le **compteur du distributeur**, mais sans remontée vers l'ECAM. ⚠️ Télérelève à ajouter |
+| **CG** | Arrivée générale de l'ECAM | Déjà comptée par le **compteur du distributeur**, mais sans remontée vers l'ECAM. ⚠️ Télérelève à ajouter |
 | **V1** | Vanne d'isolement du **S4** | **Aucune vanne n'isole le S4 aujourd'hui** : c'est celle-là qu'il s'agit d'ajouter. Les autres points sont déjà équipés |
 
 Les zones non équipées sont le **S2**, le **S3**, les **toilettes de l'étage**
@@ -70,7 +70,7 @@ explicitement, sauf si un décompte séparé du tiers est attendu.
           Arrivée générale ECAM
                  │
               ┌──┴──┐
-              │ SC5 │  index total, télérelevé
+              │ CG │  index total, télérelevé
               └──┬──┘
                  │
    ┌────────┬────┴────┬──────────┬───────────────┐
@@ -92,12 +92,12 @@ explicitement, sauf si un décompte séparé du tiers est attendu.
 
 ⚠️ **La formule énoncée à l'oral est à corriger.** Il a été dit « le compteur
 général moins les cinq sous-compteurs donne la consommation des toilettes
-restantes ». Or SC5 **est** l'arrivée générale : le soustraire de lui-même
+restantes ». Or CG **est** l'arrivée générale : le soustraire de lui-même
 n'a pas de sens. La formule correcte ne porte que sur les quatre sous-compteurs
 de zone :
 
 ```
-Résidu = SC5 − (SC1 + SC2 + SC3 + SC4)
+Résidu = CG − (SC1 + SC2 + SC3 + SC4)
 ```
 
 #### Récupérer l'index de l'arrivée générale
@@ -173,7 +173,7 @@ les rapports, et non « toilettes ».
 ### Consommation propre à l'ECAM
 
 ```
-ECAM = SC5 − Entreprise tierce
+ECAM = CG − Entreprise tierce
 ```
 
 ⚠️ Encore faut-il connaître la consommation de l'entreprise tierce. Trois
@@ -309,7 +309,7 @@ disponibilité des nœuds compteurs d'impulsions (question Q1).
 2. Les trois passerelles sont raccordées de façon pérenne, sans partage de
    connexion téléphonique.
 3. L'index de l'arrivée générale est remonté au pas horaire, le bilan
-   `SC5 − (SC1 + SC2 + SC3 + SC4)` est calculé et affiché, et son écart de
+   `CG − (SC1 + SC2 + SC3 + SC4)` est calculé et affiché, et son écart de
    bouclage documenté.
 4. Les paramètres des nœuds sont modifiables à distance depuis ChirpStack.
 5. La procédure d'installation est documentée de façon à être reproduite sur un
