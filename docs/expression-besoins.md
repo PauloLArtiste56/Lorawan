@@ -39,7 +39,7 @@ l'arrivée générale**.
 | **SC2** | Cafétéria | Correspond a priori au bar et aux toilettes principales |
 | **SC3** | S4 | Toilettes et lavabos des salles de TP |
 | **SC4** | S1 / Maupertuis | Maupertuis est **en série derrière le S1** et partage sa vanne de coupure. Position du compteur à arrêter : voir ci-dessous |
-| **SC5** | Arrivée générale de l'ECAM | Index total télérelevé |
+| **SC5** | Arrivée générale de l'ECAM | ⚠️ **Non installé à ce jour.** Sans lui, le résidu n'est pas calculable |
 | **V1** | Vanne d'isolement du **S4** | **Aucune vanne n'isole le S4 aujourd'hui** : c'est celle-là qu'il s'agit d'ajouter. Les autres points sont déjà équipés |
 
 Les zones non équipées sont le **S2**, le **S3**, les **toilettes de l'étage**
@@ -99,6 +99,26 @@ de zone :
 ```
 Résidu = SC5 − (SC1 + SC2 + SC3 + SC4)
 ```
+
+#### ⚠️ Sans SC5, le résidu n'existe pas
+
+L'arrivée générale n'étant pas équipée à ce jour, cette formule n'a pas de
+premier terme. Les conséquences sont directes :
+
+| Ce qui reste possible | Ce qui devient impossible |
+|-----------------------|---------------------------|
+| Suivre au pas horaire les quatre zones comptées, et y détecter une fuite par le minimum nocturne | Calculer le résidu au pas horaire |
+| Comparer les zones entre elles et identifier les gros postes | **Détecter une fuite dans le S2, le S3, l'étage ou les autres points non comptés** |
+| Recouper un total mensuel avec la facture d'eau | Appliquer le minimum nocturne à ces zones |
+
+Autrement dit : **l'écoulement constant du S3, qui est à l'origine du projet,
+resterait indétectable automatiquement.** Le compteur du distributeur ne fournit
+qu'un index relevé à la période de facturation, très loin du pas horaire que
+suppose l'analyse du plancher nocturne.
+
+Équiper l'arrivée générale conditionne donc la moitié de l'objectif. À défaut,
+il faut l'assumer explicitement dans les critères de réussite et annoncer que la
+détection ne couvre que les quatre zones comptées.
 
 ⚠️ **Et ce résidu n'est pas « la consommation des toilettes ».** C'est tout ce
 qui n'est pas sous-compté, c'est-à-dire :
@@ -218,10 +238,15 @@ Deux conséquences :
 1. Le diagnostic doit être **exhaustif** avant l'intervention — d'où la grille de
    relevé ([`grille-diagnostic-plombier.md`](grille-diagnostic-plombier.md)).
 2. Les vannes d'isolement sont **déjà en place** sur les points existants, en
-   amont ou en aval ; une seule vanne reste à poser (V1). À relever au
-   diagnostic : de quel côté se trouve la vanne de chaque point, une vanne d'un
-   seul côté ne permettant pas de déposer le compteur sans vidanger la portion
-   opposée.
+   amont ou en aval ; une seule reste à poser, celle qui isolera le **S4**. À
+   relever au diagnostic : de quel côté se trouve la vanne de chaque point, une
+   vanne d'un seul côté ne permettant pas de déposer le compteur sans vidanger la
+   portion opposée.
+3. **La vanne V1 doit être posée en amont du compteur SC3.** Les deux étant
+   installés lors de la même intervention, l'ordre de pose se décide maintenant :
+   en amont, le compteur du S4 pourra être déposé, contrôlé ou remplacé sans
+   nouvelle vidange ; en aval, chaque maintenance du compteur imposera de
+   revidanger l'ECAM entier.
 
 L'ECAM envisage de faire réintervenir le plombier pour le S3 : **synchroniser les
 deux interventions** est l'occasion à ne pas manquer.
@@ -249,12 +274,13 @@ disponibilité des nœuds compteurs d'impulsions (question Q1).
 | # | Question | Pourquoi c'est bloquant |
 |---|----------|-------------------------|
 | Q1 | Disposons-nous déjà des **nœuds LoRaWAN compteurs d'impulsions**, ou seulement des passerelles ? | Sans nœud, la campagne de mesures de novembre est impossible. À commander immédiatement le cas échéant. |
-| Q2 | Le compteur de Maupertuis peut-il être posé **en aval de la dérivation** de l'entreprise tierce ? | Détermine s'il faut un sixième compteur, donc le budget et le plan de pose. |
-| Q3 | SC5 remplace-t-il le compteur du distributeur, ou s'y ajoute-t-il ? | Conditionne la façon de recouper les index avec la facture d'eau. |
+| Q2 | SC4 est-il posé **en amont de la dérivation Maupertuis**, mesurant S1 et Maupertuis ensemble ? | Seule position qui garde le résidu exempt de la consommation d'un tiers. |
+| Q3 | **L'arrivée générale sera-t-elle équipée, et dans cette intervention ?** | Sans SC5, aucune fuite n'est détectable dans les zones non comptées — dont le S3. Question la plus structurante du projet. |
 | Q4 | La demande d'accès WiFi au service informatique est-elle déposée ? | Sur le chemin critique ; un refus impose une solution filaire ou 4G à budgéter. |
 | Q5 | Qui passe commande, sur quel budget, avec quel délai de validation ? | Des fonds DAISI existent ; le circuit d'achat conditionne le délai de livraison. |
 | Q8 | Quelle **date d'intervention** et quelle **date de diagnostic** ? | Si l'intervention a lieu aux vacances de la Toussaint, tout doit être livré avant le 09/10. |
 | Q9 | Le suivi du **minimum nocturne** du résidu est-il retenu comme méthode de détection ? | C'est la seule qui reste sensible malgré l'agrégation de cinq à six zones. La localisation resterait manuelle. |
+| Q11 | La vanne **V1 sera-t-elle posée en amont du compteur SC3** ? | La vanne et le compteur étant posés dans la même intervention, l'ordre de pose se décide maintenant. En amont, le compteur pourra être déposé plus tard sans vidanger l'ECAM ; en aval, toute maintenance du compteur imposera de nouveau une vidange générale. |
 | ~~Q10~~ | ~~Où et pourquoi la vanne V1 ?~~ | ✅ Tranchée : vanne d'isolement, une seule à poser. |
 | ~~Q6~~ | ~~Les zones non équipées sont-elles identifiées ?~~ | ✅ Tranchée : le résidu couvre le S2 et le S3. |
 | Q7 | Quelle **précision attendue** sur le résidu ? | Le résidu cumule les erreurs des cinq compteurs : c'est la grandeur la moins précise du système, alors que c'est celle qui porte la détection de fuite. |
@@ -263,12 +289,12 @@ disponibilité des nœuds compteurs d'impulsions (question Q1).
 
 À valider avec les encadrants :
 
-1. Les cinq sous-compteurs remontent un index dans ChirpStack, au pas horaire,
+1. Les sous-compteurs posés remontent un index dans ChirpStack, au pas horaire,
    avec un taux de messages reçus supérieur à 95 % sur quinze jours consécutifs.
 2. Les trois passerelles sont raccordées de façon pérenne, sans partage de
    connexion téléphonique.
-3. Le bilan `SC5 − (SC1 + SC2 + SC3 + SC4)` est calculé et affiché, et son
-   écart de bouclage est documenté et expliqué.
+3. Si l'arrivée générale est équipée : le bilan `SC5 − (SC1 + SC2 + SC3 + SC4)`
+   est calculé et affiché, et son écart de bouclage documenté.
 4. Les paramètres des nœuds sont modifiables à distance depuis ChirpStack.
 5. La procédure d'installation est documentée de façon à être reproduite sur un
    autre site, conformément à l'objectif du projet DAISI.
