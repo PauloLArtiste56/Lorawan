@@ -37,7 +37,10 @@ collées : ne les ressaisis pas, appuie-toi dessus.
 
 Contexte : PRI 2026-2027 à l'ECAM, projet collaboratif DAISI. Suivi de la
 consommation d'eau avec LoRaWAN. Du 14/09/2026 au 28/01/2027, 20 semaines,
-35 séances, 180 heures au total.
+35 séances, 180 heures au total. Équipe de deux : Paul Thiboult et Lilian Grot.
+Le périmètre est de quatre sous-compteurs de zone plus la télérelève de
+l'arrivée générale (repérée CG), avec trois passerelles déjà disponibles et
+ChirpStack comme serveur de réseau.
 
 Adapte le nom des fonctions à la langue de ce classeur.
 
@@ -177,21 +180,27 @@ Ajoute une colonne Commentaire et renseigne-la pour deux jalons :
   - J5 : filet de sécurité. S'il est tenu, une démonstration existe pour la
     soutenance même si l'installation physique prend du retard. L'ECAM disposant
     déjà de ses trois passerelles, ce jalon ne dépend que d'un nœud de test.
+Ajoute enfin une ligne d'alerte sous le tableau : si l'intervention du plombier
+est avancée aux vacances de la Toussaint, J4 remonte à début octobre et tout le
+planning aval est à refaire — les compteurs devraient alors être spécifiés,
+commandés et livrés avant le 9 octobre, dernière séance avant les vacances.
 Mets J4 en évidence. Colore l'écart : vert si négatif ou nul, orange jusqu'à
 7 jours, rouge au-delà.
 
 FEUILLE « Risques » — colonnes : ID, Risque, Cause, Probabilité de 1 à 4,
 Gravité de 1 à 4, Criticité (le produit), Parade, Responsable, Statut.
   R1 | Propagation radio insuffisante dans les locaux techniques enterrés | Béton, trappes métalliques, compteurs en sous-sol | 4 | 4
-  R2 | Commande non passée au 4 décembre | Devis tardifs ou validation budgétaire lente | 3 | 4
-  R3 | Indisponibilité du service technique sur le créneau de janvier | Créneau unique, charge du service | 3 | 4
-  R4 | Délai d'approvisionnement dépassant les vacances de Noël | Ruptures fréquentes sur les nœuds LoRaWAN | 3 | 4
-  R9 | Accès WiFi refusé par le service informatique pour les passerelles | Politique de sécurité ; le partage de connexion téléphonique n'est pas viable en exploitation | 2 | 4
-  R10 | Consommation de l'entreprise tierce non isolable sur SC3 | Dérivation en amont du point de pose envisagé | 3 | 3
-  R5 | Périmètre de la plateforme ECAM existante mal cerné | Absence d'inventaire initial | 3 | 3
-  R6 | Nœud compteur d'impulsions non disponible pour la campagne de novembre | Commande passée trop tard en septembre | 2 | 4
-  R7 | Refus ou restriction de la DSI sur l'hébergement et les flux réseau | Politique de sécurité de l'établissement | 2 | 3
-  R8 | Plans AutoCAD indisponibles ou obsolètes | Archives des services techniques | 2 | 2
+  R2 | Compteurs livrés sans sortie impulsion | Option non mentionnée à la commande ; un compteur standard n'en comporte pas | 3 | 4
+  R3 | Commande non passée dans les délais | Devis tardifs ou validation budgétaire lente | 3 | 4
+  R4 | Délai d'approvisionnement dépassant la fenêtre disponible | Ruptures fréquentes sur les nœuds LoRaWAN | 3 | 4
+  R5 | Indisponibilité du service technique sur le créneau d'intervention | Créneau unique, charge du service | 3 | 4
+  R6 | Pose oubliée ou incomplète, non rattrapable | Chaque intervention impose de vidanger l'ECAM en totalité | 2 | 4
+  R7 | Refus du distributeur de laisser poser un module sur son compteur | Compteur plombé et propriété du distributeur ; sans index de l'arrivée générale, pas de résidu donc pas de détection de fuite | 3 | 4
+  R8 | Matériel acheté en wM-Bus au lieu de LoRaWAN | Les deux émettent en 868 MHz, la confusion est fréquente ; ChirpStack ne recevrait rien | 2 | 4
+  R9 | Nœud compteur d'impulsions indisponible pour la campagne de novembre | Commande passée trop tard en septembre | 2 | 4
+  R10 | Accès WiFi refusé pour les passerelles | Politique de sécurité ; le partage de connexion téléphonique n'est pas viable en exploitation | 2 | 4
+  R11 | Consommation de l'entreprise tierce non isolable sur SC4 | Compteur posé en aval de la dérivation Maupertuis | 3 | 3
+  R12 | Plans du bâtiment indisponibles ou obsolètes | Archives des services techniques | 2 | 2
 Trie par criticité décroissante, colore la criticité en échelle vert-orange-rouge,
 et laisse les colonnes Parade, Responsable et Statut vides : je les remplirai.
 
