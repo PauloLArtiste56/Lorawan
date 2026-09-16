@@ -12,13 +12,13 @@ const FOND_TETE = "0B5563", FOND_CLAIR = "EDF2F4", FOND_ALERTE = "FDF3E7";
 const nb = (t, o = {}) => new TextRun({ text: t, font: "Calibri", size: 18, color: ENCRE, ...o });
 const p = (t, o = {}) => new Paragraph({
   children: Array.isArray(t) ? t : [nb(t)],
-  spacing: { after: 80, line: 240 }, ...o,
+  spacing: { after: 70, line: 238 }, ...o,
 });
 
 function h(txt) {
   return new Paragraph({
     children: [new TextRun({ text: txt, font: "Calibri", size: 21, bold: true, color: ACCENT })],
-    spacing: { before: 200, after: 90 },
+    spacing: { before: 150, after: 70 },
     border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: "C3CED4", space: 2 } },
   });
 }
@@ -142,11 +142,11 @@ const doc = new Document({
         ["SC1", "Annexe / NE", "A priori la cuisine et l'appartement"],
         ["SC2", "Cafétéria", "A priori le bar et les toilettes principales"],
         ["SC3", "S4", "Toilettes et lavabos des salles de TP"],
-        ["SC4", "Maupertuis", "À rapprocher du point « S1 » de nos notes, qui comporte la dérivation d'une entreprise tierce"],
+        ["SC4", "Maupertuis (= S1)", "Comporte la dérivation d'une entreprise tierce"],
         ["SC5", "Arrivée générale de l'ECAM", "Index total télérelevé"],
-        ["V1", "Vanne", "Emplacement et fonction à préciser"],
-      ], { premierGras: true, alerte: [3, 5] }),
-      p([nb("Le S3 n'est équipé d'aucun sous-compteur", { bold: true }), nb(", alors que l'écoulement constant constaté dans ses toilettes motive le projet : une fuite y serait détectée par le résidu, mais non localisée. À arbitrer.")]),
+        ["V1", "Vanne d'isolement", "Une seule à poser ; les autres points sont déjà équipés"],
+      ], { premierGras: true, alerte: [3] }),
+      p([nb("Le S2 et le S3 ne sont pas équipés", { bold: true }), nb(" : leur consommation est obtenue par différence, dans le résidu. C'est le cas de l'écoulement constant du S3, à l'origine du projet — détecté, mais non localisé entre les deux zones.")]),
 
       // ---------- 4 ----------
       h("4.  Calcul du poste non sous-compté"),
@@ -157,7 +157,7 @@ const doc = new Document({
       p([
         nb("SC5 étant l'arrivée générale, la formule ne porte que sur les quatre sous-compteurs de zone. "),
         nb("Ce résidu n'est pas la consommation des toilettes", { bold: true }),
-        nb(" : il agrège les toilettes non équipées, les usages divers non comptés et les fuites du réseau enterré. Il est donc désigné « non sous-compté » dans ChirpStack et dans les rapports. Un résidu qui ne redescend pas la nuit signale une fuite, et non un usage — c'est précisément ce que le projet doit détecter."),
+        nb(" : il agrège le S2 et le S3, non équipés, les usages divers non comptés et les fuites du réseau. Il est donc désigné « non sous-compté » dans ChirpStack et dans les rapports. Un résidu qui ne redescend pas la nuit signale une fuite, et non un usage — c'est précisément ce que le projet doit détecter."),
       ]),
       p([
         nb("Consommation propre à l'ECAM : "),
@@ -174,7 +174,7 @@ const doc = new Document({
       p([nb("c.  Achat et devis. ", { bold: true }),
          nb("Décidé : l'ECAM achète le matériel, le plombier réalise la pose ; le devis demandé porte sur la seule intervention, que des fonds DAISI peuvent contribuer à financer. La spécification des compteurs nous incombe donc : compatibilité avec les diamètres relevés, avec les longueurs droites disponibles et avec les nœuds LoRaWAN. La sortie impulsion doit figurer explicitement à la commande — un compteur d'eau standard n'en comporte pas, et sans elle rien ne remonte.")]),
       p([nb("d.  Contrainte majeure : la vidange complète. ", { bold: true }),
-         nb("Toute intervention impose de vidanger l'ECAM en totalité : il n'y aura pas de second passage pour compléter une pose oubliée. Le diagnostic doit donc être exhaustif, et chaque compteur encadré de deux vannes d'isolement — sans quoi son remplacement futur imposera une nouvelle vidange générale pour un seul appareil. Le surcoût est marginal au regard d'une vidange, et la décision se prend maintenant ou jamais. L'ECAM devant faire réintervenir le plombier pour le S3, synchroniser les deux interventions est l'occasion à saisir.")]),
+         nb("Toute intervention impose de vidanger l'ECAM en totalité : pas de second passage pour compléter une pose oubliée, d'où l'exigence d'un diagnostic exhaustif. Les vannes d'isolement sont déjà en place sur les points existants ; une seule reste à poser. Relever toutefois de quel côté se trouve chaque vanne : d'un seul côté, elle ne permet pas de déposer le compteur sans vidanger la portion opposée. L'ECAM devant faire réintervenir le plombier pour le S3, synchroniser les deux interventions est l'occasion à saisir.")]),
       p([nb("e.  Remontée des données. ", { bold: true }),
          nb("Collecter les relevés par LoRaWAN et les exploiter dans ChirpStack, pour la visualisation comme pour le paramétrage à distance des nœuds.")]),
 
@@ -187,8 +187,8 @@ const doc = new Document({
         ["Q4", "La demande d'accès WiFi au service informatique est-elle déposée ?", "Chemin critique ; un refus impose du filaire ou de la 4G"],
         ["Q5", "Qui passe commande, sur quel budget, avec quel délai de validation ?", "Des fonds DAISI existent ; le circuit d'achat conditionne le délai de livraison"],
         ["Q6", "Quelles dates de diagnostic et d'intervention ?", "Si l'intervention a lieu aux vacances de la Toussaint, tout doit être livré avant le 9 octobre"],
-        ["Q7", "Le S3 est-il inclus dans une zone comptée ?", "Sinon sa fuite n'est détectée que par différence, sans localisation"],
-        ["Q8", "Où et pourquoi la vanne V1 ?", "Absente de nos notes de cadrage initiales"],
+        ["Q7", "Est-il acceptable que le S2 et le S3 ne soient pas distingués dans le résidu ?", "Une fuite y est détectée, mais non localisée entre les deux zones"],
+        ["Q8", "Quelle précision est attendue sur le résidu ?", "Il cumule les erreurs des cinq compteurs, alors qu'il porte la détection de fuite"],
       ], { petit: true, premierGras: true }),
 
       // ---------- 7 ----------

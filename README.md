@@ -45,7 +45,8 @@ base de données, on ne peut pas distinguer ce qui est à intégrer de ce qui es
 |----------|---------|
 | [`docs/expression-besoins.md`](docs/expression-besoins.md) | **Expression des besoins (G1)** : les 5 points de comptage, le calcul du résidu, les questions ouvertes |
 | [`docs/Expression-des-besoins.docx`](docs/Expression-des-besoins.docx) | La même, en Word sur 2 pages, à faire signer — régénérable via `tools/build-expression-besoins.js` |
-| [`docs/reunion-2026-09-17.md`](docs/reunion-2026-09-17.md) | **Préparation de la réunion « Intervention eau ECAM »** du 17/09 |
+| [`docs/reunion-2026-09-17.md`](docs/reunion-2026-09-17.md) | **Prépa 17/09** — réunion bâtiment : dates, accès aux locaux, plans |
+| [`docs/reunion-2026-09-18.md`](docs/reunion-2026-09-18.md) | **Prépa 18/09** — revue avec les encadrants : validation du G1, arbitrages |
 | [`docs/grille-diagnostic-plombier.md`](docs/grille-diagnostic-plombier.md) | Grille de relevé pour le diagnostic du plombier |
 | [`docs/livrables.md`](docs/livrables.md) | Livrables du PRI, avancement, questions aux encadrants |
 | [`docs/planning-180h.md`](docs/planning-180h.md) | Les 180 h sur 35 séances réelles, chemin critique, jalons |

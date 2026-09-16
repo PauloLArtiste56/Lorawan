@@ -38,14 +38,14 @@ l'arrivée générale**.
 | **SC1** | Annexe / NE | Correspond a priori à la cuisine et à l'appartement |
 | **SC2** | Cafétéria | Correspond a priori au bar et aux toilettes principales |
 | **SC3** | S4 | Toilettes et lavabos des salles de TP |
-| **SC4** | Maupertuis | ⚠️ À rapprocher du point « S1 » de nos notes, qui comporte la dérivation d'une **entreprise tierce** |
+| **SC4** | Maupertuis (= S1) | Comporte la dérivation d'une **entreprise tierce** |
 | **SC5** | Arrivée générale de l'ECAM | Index total télérelevé |
-| **V1** | Vanne | ⚠️ Emplacement et fonction à préciser |
+| **V1** | Vanne d'isolement | Une seule à poser ; les autres points sont déjà équipés en amont ou en aval |
 
-⚠️ **Le S3 n'est équipé d'aucun sous-compteur**, alors que c'est l'écoulement
-constant constaté dans ses toilettes qui motive le projet. Une fuite au S3
-apparaîtrait dans le résidu, donc serait détectée, mais **non localisée**. À
-arbitrer avec les encadrants.
+Le **S2 et le S3 ne sont pas équipés** : leur consommation est obtenue par
+différence, dans le résidu. C'est notamment le cas de l'écoulement constant
+constaté dans les toilettes du S3, à l'origine du projet — il serait donc
+**détecté**, mais **non localisé** entre les deux zones.
 
 ### Topologie
 
@@ -87,9 +87,9 @@ Résidu = SC5 − (SC1 + SC2 + SC3 + SC4)
 qui n'est pas sous-compté, c'est-à-dire :
 
 ```
-Résidu = toilettes non équipées
-       + usages divers non comptés (arrosage, entretien, points d'eau isolés)
-       + FUITES du réseau enterré
+Résidu = S2 + S3  (non équipés)
+       + usages divers non comptés
+       + FUITES du réseau
 ```
 
 Cette distinction n'est pas un détail de vocabulaire : c'est le cœur de la
@@ -183,10 +183,11 @@ Deux conséquences :
 
 1. Le diagnostic doit être **exhaustif** avant l'intervention — d'où la grille de
    relevé ([`grille-diagnostic-plombier.md`](grille-diagnostic-plombier.md)).
-2. Chaque compteur doit être encadré de **deux vannes d'isolement**, faute de
-   quoi son remplacement dans quelques années imposera une nouvelle vidange
-   générale du site pour un seul appareil. Le surcoût est marginal au regard
-   d'une vidange ; la décision se prend maintenant ou jamais.
+2. Les vannes d'isolement sont **déjà en place** sur les points existants, en
+   amont ou en aval ; une seule vanne reste à poser (V1). À relever au
+   diagnostic : de quel côté se trouve la vanne de chaque point, une vanne d'un
+   seul côté ne permettant pas de déposer le compteur sans vidanger la portion
+   opposée.
 
 L'ECAM envisage de faire réintervenir le plombier pour le S3 : **synchroniser les
 deux interventions** est l'occasion à ne pas manquer.
@@ -219,9 +220,9 @@ disponibilité des nœuds compteurs d'impulsions (question Q1).
 | Q4 | La demande d'accès WiFi au service informatique est-elle déposée ? | Sur le chemin critique ; un refus impose une solution filaire ou 4G à budgéter. |
 | Q5 | Qui passe commande, sur quel budget, avec quel délai de validation ? | Des fonds DAISI existent ; le circuit d'achat conditionne le délai de livraison. |
 | Q8 | Quelle **date d'intervention** et quelle **date de diagnostic** ? | Si l'intervention a lieu aux vacances de la Toussaint, tout doit être livré avant le 09/10. |
-| Q9 | Le **S3** est-il inclus dans une zone comptée ? | Sinon sa fuite n'est détectée que par différence, sans localisation. |
-| Q10 | Où et pourquoi la **vanne V1** ? | Absente de nos notes initiales. |
-| Q6 | Les toilettes non équipées sont-elles identifiées et localisées ? | Sans cela, le résidu ne peut pas être interprété. |
+| Q9 | Est-il acceptable que le S2 et le S3 ne soient pas distingués l'un de l'autre dans le résidu ? | Une fuite y est détectée mais non localisée entre les deux zones. |
+| ~~Q10~~ | ~~Où et pourquoi la vanne V1 ?~~ | ✅ Tranchée : vanne d'isolement, une seule à poser. |
+| ~~Q6~~ | ~~Les zones non équipées sont-elles identifiées ?~~ | ✅ Tranchée : le résidu couvre le S2 et le S3. |
 | Q7 | Quelle **précision attendue** sur le résidu ? | Le résidu cumule les erreurs des cinq compteurs : c'est la grandeur la moins précise du système, alors que c'est celle qui porte la détection de fuite. |
 
 ## 7. Critères de réussite proposés (livrable G2)
