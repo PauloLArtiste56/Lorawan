@@ -18,7 +18,7 @@ de données de consommation d'énergie.*
 
 | # | Livrable | État | Où |
 |---|----------|------|-----|
-| T1 | Revue des matériels et logiciels disponibles | 🟡 amorcé | [`etat-de-l-art.md`](etat-de-l-art.md) ; [`expression-besoins.md`](expression-besoins.md#2-moyens-disponibles) |
+| T1 | Revue des matériels et logiciels disponibles | 🟢 fait | [`Etat-de-l-art.docx`](Etat-de-l-art.docx) pour le dossier ; [`etat-de-l-art.md`](etat-de-l-art.md) en version longue |
 | T2 | Plan de déploiement (support AutoCAD ou équivalent) | ⏳ à faire | — |
 | T3 | Étude de propagation LoRaWAN, entre simulation et réalité terrain | 🟡 amorcé | [`materiel.md`](materiel.md#risque-principal--la-propagation-radio-en-sous-sol) |
 | T4 | Identification des matériels complémentaires (capteurs / compteurs) + devis fournisseur | 🟡 amorcé | [`materiel.md`](materiel.md) ; grille de relevé prête : [`grille-diagnostic-plombier.md`](grille-diagnostic-plombier.md) |
