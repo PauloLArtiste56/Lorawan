@@ -48,6 +48,7 @@ base de données, on ne peut pas distinguer ce qui est à intégrer de ce qui es
 | [`docs/reunion-2026-09-17.md`](docs/reunion-2026-09-17.md) | **Prépa 17/09** — réunion bâtiment : dates, accès aux locaux, plans |
 | [`docs/reunion-2026-09-18.md`](docs/reunion-2026-09-18.md) | **Prépa 18/09** — revue avec les encadrants : validation du G1, arbitrages |
 | [`docs/grille-diagnostic-plombier.md`](docs/grille-diagnostic-plombier.md) | Grille de relevé pour le diagnostic du plombier |
+| [`docs/fiche-releve-passerelles.md`](docs/fiche-releve-passerelles.md) | Fiche de relevé des passerelles, avec le premier constat terrain |
 | [`docs/livrables.md`](docs/livrables.md) | Livrables du PRI, avancement, questions aux encadrants |
 | [`docs/planning-180h.md`](docs/planning-180h.md) | Les 180 h sur 35 séances réelles, chemin critique, jalons |
 | [`docs/seances.csv`](docs/seances.csv) | Le calendrier des séances, exploitable par un tableur |

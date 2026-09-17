@@ -1,0 +1,34 @@
+Rubrique;Information;Passerelle 1;Passerelle 2;Passerelle 3
+Identification;EUI declare dans ChirpStack;7766554433221100;7276ff0039090e70;0011223344556677
+Identification;Nom actuel dans ChirpStack;gatewauDenysDepuisLaOld;Femtocell_090E70;gateway_hamza
+Identification;EUI reel lu sur le boitier / interface web;;;
+Identification;Nom propose apres renommage;;;
+Identification;Marque et modele;;;
+Identification;Numero de serie;;;
+Localisation;Batiment;;;
+Localisation;Niveau / etage;;;
+Localisation;Local (nom, numero);;;
+Localisation;Position dans le local;;;
+Localisation;Hauteur par rapport au sol;;;
+Localisation;Latitude;;;
+Localisation;Longitude;;;
+Localisation;Reporte sur le plan (O/N);;;
+Antenne;Antenne interne ou externe;;;
+Antenne;Position et orientation;;;
+Antenne;Longueur et type de cable;;;
+Antenne;Obstacles immediats;;;
+Antenne;Degagement vers les zones a couvrir;;;
+Raccordement;Alimentation;;;
+Raccordement;Raccordement reseau;;;
+Raccordement;Adresse IP / nom d'hote;;;
+Raccordement;Acces administration;;;
+Raccordement;Responsable;;;
+Verification;Date du controle;17/09/2026;17/09/2026;17/09/2026
+Verification;Statut ChirpStack;Online;Online;Online
+Verification;Presente dans le rxInfo (O/N);O;O;N
+Verification;RSSI au contact (dBm);-49;-114;
+Verification;SNR au contact (dB);11.2;-11.0;
+Verification;Facteur d'etalement;SF9;SF9;
+Verification;Verdict;Recoit - excellent;Recoit - limite;NE RECOIT PAS - a investiguer
+Observations;Photo prise (O/N);;;
+Observations;Remarques;;;
