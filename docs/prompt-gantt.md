@@ -189,7 +189,7 @@ Mets J4 en évidence. Colore l'écart : vert si négatif ou nul, orange jusqu'à
 
 FEUILLE « Risques » — colonnes : ID, Risque, Cause, Probabilité de 1 à 4,
 Gravité de 1 à 4, Criticité (le produit), Parade, Responsable, Statut.
-  R1 | Propagation radio insuffisante dans les locaux techniques enterrés | Béton, trappes métalliques, compteurs en sous-sol | 4 | 4
+  R1 | Propagation radio insuffisante aux points de comptage | Ossature metallique, gaines et chemins de cables du sous-plafond | 3 | 4
   R2 | Compteurs livrés sans sortie impulsion | Option non mentionnée à la commande ; un compteur standard n'en comporte pas | 3 | 4
   R3 | Commande non passée dans les délais | Devis tardifs ou validation budgétaire lente | 3 | 4
   R4 | Délai d'approvisionnement dépassant la fenêtre disponible | Ruptures fréquentes sur les nœuds LoRaWAN | 3 | 4

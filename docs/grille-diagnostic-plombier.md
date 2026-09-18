@@ -60,7 +60,10 @@ point**. Version tableur : [`grille-diagnostic-plombier.csv`](grille-diagnostic-
 | Hauteur du point par rapport au sol | | Un compteur illisible ne sera jamais relevé |
 | Encombrement autour du point | | Conditionne la pose et l'entretien |
 | Accès : clé, code, personne à contacter | | À connaître avant le jour de l'intervention |
-| Local enterré ? Murs béton ? Trappe métallique ? | | **Détermine la difficulté de la liaison radio** |
+| Type d'emplacement | Sous-plafond / local technique / fosse | **Détermine la difficulté de la liaison radio** |
+| Ossature métallique, gaines, chemins de câbles à proximité | | Principal facteur d'atténuation en sous-plafond |
+| **Emplacement envisagé pour le nœud** | | Le nœud peut être déporté du compteur par son câble |
+| **Longueur de câble nécessaire** entre compteur et nœud | | Conditionne le déport, à commander avec le compteur |
 | Point d'alimentation électrique à proximité | | Utile si un nœud secteur est envisagé |
 
 ### Arrivée générale uniquement — compteur du distributeur

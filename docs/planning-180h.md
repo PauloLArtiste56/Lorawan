@@ -60,7 +60,7 @@ Le planning ci-dessous les exploite délibérément.
 | 10 | 09/10 | ven | 4 | 4 | 42 | Simulation de couverture. Relance des démarches en attente | T3 |
 | 11 | 03/11 | mar | 8 | 4 | 46 | Campagne de mesures terrain — bâtiment A | T3 |
 | 12 | 04/11 | mer | 8 | 2 | 48 | Campagne de mesures terrain — bâtiment B | T3 |
-| 13 | 06/11 | ven | 8 | 2 | 50 | Campagne de mesures terrain — locaux techniques enterrés | T3 |
+| 13 | 06/11 | ven | 8 | 2 | 50 | Campagne de mesures terrain — points en sous-plafond | T3 |
 | 14 | 13/11 | ven | 9 | 4 | 54 | Analyse des écarts simulation / terrain. Nomenclature préliminaire et demandes de devis | T3 T4 |
 | | | | | | | **Plan de déploiement** | |
 | 15 | 19/11 | jeu | 10 | 2 | 56 | Récupération et préparation des plans des bâtiments | T2 |

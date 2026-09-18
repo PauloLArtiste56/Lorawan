@@ -125,12 +125,28 @@ trois — moins d'achat, et surtout moins de piles à remplacer dans cinq ans.
 **À vérifier lors du relevé** : quels points sont assez proches pour partager un
 nœud, en tenant compte de la longueur de câble admissible.
 
+### Le nœud ne se pose pas forcément à côté du compteur
+
+Le compteur est sur le tuyau, il n'a pas le choix. **Le nœud, lui, est relié par
+un câble** : il peut être déporté de quelques mètres.
+
+Les compteurs de l'ECAM étant en sous-plafond, cela ouvre deux possibilités :
+
+- **poser le nœud sous le faux plafond**, visible et accessible — le remplacement
+  des piles dans cinq ans se fait alors sans échelle ni démontage de dalles ;
+- **le déplacer de quelques mètres** si la mesure montre que la radio passe mieux
+  ailleurs : hors d'une zone encombrée de gaines, à l'écart d'un chemin de câbles.
+
+Ce déport est le levier le moins cher pour rattraper un point marginal. Il impose
+de **relever la longueur de câble nécessaire lors du diagnostic** et de la
+commander avec le compteur.
+
 ### Références
 
 | Modèle | Entrées | Étanchéité | Remarque |
 |--------|---------|------------|----------|
-| **[Watteco Pulse SENS'O IP55](https://www.watteco.fr/produit/capteur-pulse-senso-lorawan/)** | 3 | IP55 | Intérieur, local technique sec |
-| **[Watteco Pulse SENS'O IP68](https://www.watteco.fr/produit/capteur-pulse-senso-waterproof-lorawan/)** | 3 | IP68 | **Pour local enterré ou humide** — le cas de l'ECAM |
+| [Watteco Pulse SENS'O IP68](https://www.watteco.fr/produit/capteur-pulse-senso-waterproof-lorawan/) | 3 | IP68 | Si un point se révèle humide ou en fosse |
+| **[Watteco Pulse SENS'O IP55](https://www.watteco.fr/produit/capteur-pulse-senso-lorawan/)** | 3 | IP55 | **Suffisant en sous-plafond sec** — le cas de l'ECAM |
 | [Watteco Pulse SENS'O ATEX](https://airicom.com/watteco/7430-50-70-152-capteur-impusion-lorawan-certifie-apex-nke-pulso.html) | 3 | IP68 ATEX | Inutile ici, pas de zone explosive |
 | [Adeunis PULSE](https://smartbuildings.fr/produit/adeunis-pulse-atex-compteur-dimpulsions-pour-environnement-atex-lorawan/) | 2 à 4 selon version | IP67/IP68 | Industriel, autonomie longue |
 | Dragino SW3L, LDS02 | 1 à 2 | IP65+ | Le moins cher, firmware fermé |
@@ -150,8 +166,9 @@ Ce n'est pas un réflexe de marque, c'est une économie de temps :
 - **Trois entrées** par nœud, ce qui ouvre le regroupement ci-dessus ;
 - Fabricant français, ce qui simplifie l'achat public et le support.
 
-Prendre l'**IP68** : les locaux techniques enterrés sont humides, et une
-condensation dans un boîtier IP55 se paie deux ans plus tard.
+**L'IP55 suffit** : les compteurs de l'ECAM sont en sous-plafond, dans des
+volumes secs et chauffés. Réserver l'IP68 à un point qui se révélerait humide ou
+en fosse lors du relevé.
 
 ---
 
@@ -209,7 +226,7 @@ là où c'est possible.
 |-------|----------|-------------------|
 | Compteurs DN15–DN20, R160, sortie impulsion | 4 | 240 – 520 € |
 | Compteur ou module pour l'arrivée générale | 1 | 80 – 250 € |
-| Nœuds LoRaWAN 3 entrées, IP68 | 2 à 4 | 200 – 600 € |
+| Nœuds LoRaWAN 3 entrées, IP55 | 4 | 240 – 600 € |
 | Vanne d'isolement du S4 | 1 | 30 – 80 € |
 | Câblage, presse-étoupes, fixations | — | 50 – 150 € |
 | **Total matériel** | | **≈ 600 – 1 600 €** |

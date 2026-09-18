@@ -309,20 +309,25 @@ Ordres de grandeur pour une largeur de bande de 125 kHz [7][11] :
 Un récepteur LoRa démodule donc un signal **20 dB sous le niveau de bruit** à
 SF12, ce qu'aucune modulation classique ne permet.
 
-**Pour ce projet, c'est le point dur.** Les compteurs d'eau se trouvent en locaux
-techniques enterrés, derrière du béton armé et parfois une trappe métallique — le
-cas défavorable type.
+**Pour ce projet, le relevé a corrigé une hypothèse de départ.** Les compteurs de
+l'ECAM ne sont pas en local enterré mais **en sous-plafond**, ce qui est une
+situation nettement plus favorable : pas de dalle béton entre le nœud et la
+passerelle, et une position en hauteur, avantageuse pour la propagation. Le
+facteur d'atténuation dominant n'est donc pas le béton mais l'**ossature
+métallique du faux plafond**, les gaines de ventilation et les chemins de câbles.
 
-Une campagne de mesures publiée sur l'instrumentation de bâtiments profonds
-rapporte une atténuation d'environ **10 dB par plancher** vers les étages, mais
-d'environ **55 dB pour atteindre le sous-sol** [12]. Cet écart d'un facteur cinq
-illustre pourquoi un bilan de liaison établi sur des étages courants ne se
-transpose pas à un local enterré, et pourquoi la mesure est indispensable.
+L'ordre de grandeur reste utile pour situer l'enjeu : une campagne publiée sur
+l'instrumentation de bâtiments profonds rapporte environ **10 dB par plancher**
+vers les étages, mais environ **55 dB pour atteindre un sous-sol** [12]. Cet
+écart d'un facteur cinq montre à quel point un bilan de liaison ne se transpose
+pas d'un type d'emplacement à un autre — et pourquoi la mesure sur site reste
+indispensable même dans un cas favorable.
 
 Les modèles de propagation intérieure — **ITU-R P.1238** [13], qui couvre 300 MHz
 à 100 GHz, et les modèles multi-murs de type **COST 231**, qui ajoutent au modèle
 en espace libre une perte par mur et par plancher traversé — permettent d'estimer
-ces pertes, mais avec une incertitude importante en sous-sol.
+ces pertes, mais avec une incertitude qui reste importante dès qu'une ossature
+métallique est en jeu.
 
 **D'où la nécessité d'une campagne de mesures.** C'est précisément ce que demande
 le livrable T3 en opposant « simulation » et « réalité terrain » : la valeur du
