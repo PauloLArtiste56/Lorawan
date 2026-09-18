@@ -5,7 +5,37 @@
 > données pour orienter la consultation ; **le choix définitif dépend des
 > diamètres relevés par le plombier**.
 
+## Périmètre actuel : les 4 sous-compteurs de zone
+
+Décision de l'équipe (18/09/2026) : **l'achat porte pour l'instant sur les quatre
+sous-compteurs de zone uniquement**. L'arrivée générale est déjà comptée par le
+distributeur ; la récupération de son index sera négociée avec lui séparément.
+
+Cela **clôt l'arbitrage** pour ce qui est à acheter maintenant : les quatre points
+sont en petit diamètre, où un compteur mécanique R160 garantit la mesure dès
+environ 15 L/h. C'est suffisant, et l'ultrasonique ne se justifie pas.
+
+→ **Retenu pour les quatre zones : compteur mécanique R160 à sortie impulsion,
+plus nœud Watteco Pulse SENS'O IP68.**
+
+### Ce que le projet détecte déjà sans l'arrivée générale
+
+Le résidu n'est pas calculable tant que l'index de l'arrivée générale ne remonte
+pas. Mais **la détection de fuite par minimum nocturne fonctionne dès maintenant
+sur chacune des quatre zones comptées** : si le débit de nuit d'une zone ne
+retombe pas à zéro, elle fuit.
+
+Ce qui reste hors de portée est la détection dans les zones **non comptées** —
+S2, S3, toilettes de l'étage — qui, elle, exige l'arrivée générale. Le phasage est
+donc cohérent : les quatre compteurs apportent une valeur immédiate, l'arrivée
+générale étend la couverture ensuite.
+
+---
+
 ## Trois architectures possibles, à arbitrer sur devis
+
+> Cette comparaison reste utile pour le rapport, et pour la décision à venir sur
+> l'arrivée générale. Elle ne concerne pas l'achat en cours.
 
 | | Métrologie | Électronique dans la tuyauterie | Coût |
 |---|---|---|---|
