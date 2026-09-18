@@ -56,7 +56,7 @@ base de données, on ne peut pas distinguer ce qui est à intégrer de ce qui es
 | [`docs/prompt-gantt.md`](docs/prompt-gantt.md) | Prompts pour construire le classeur de suivi avec Claude pour Excel |
 | [`docs/etat-de-l-art.md`](docs/etat-de-l-art.md) | **État de l'art** : comptage, transmission, propagation, détection de fuites — avec références |
 | [`docs/Etat-de-l-art.docx`](docs/Etat-de-l-art.docx) | La version condensée en Word sur 4 pages, pour le dossier |
-| [`docs/materiel.md`](docs/materiel.md) | Short-list matériel chiffrée, risque de propagation en sous-sol |
+| [`docs/materiel.md`](docs/materiel.md) | **Références matériel** : compteurs à impulsion, nœuds LoRaWAN, chiffrage, checklist fournisseur |
 | [`docs/lorawan-payload.md`](docs/lorawan-payload.md) | Spécification du payload applicatif |
 | [`docs/decisions.md`](docs/decisions.md) | Décisions prises et décisions ouvertes |
 

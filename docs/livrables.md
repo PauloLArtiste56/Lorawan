@@ -21,7 +21,7 @@ de données de consommation d'énergie.*
 | T1 | Revue des matériels et logiciels disponibles | 🟢 fait | [`Etat-de-l-art.docx`](Etat-de-l-art.docx) pour le dossier ; [`etat-de-l-art.md`](etat-de-l-art.md) en version longue |
 | T2 | Plan de déploiement (support AutoCAD ou équivalent) | ⏳ à faire | — |
 | T3 | Étude de propagation LoRaWAN, entre simulation et réalité terrain | 🟡 en cours | Testeur NETW'O opérationnel ; [`fiche-releve-passerelles.md`](fiche-releve-passerelles.md) — premières mesures faites |
-| T4 | Identification des matériels complémentaires (capteurs / compteurs) + devis fournisseur | 🟡 amorcé | [`materiel.md`](materiel.md) ; grille de relevé prête : [`grille-diagnostic-plombier.md`](grille-diagnostic-plombier.md) |
+| T4 | Identification des matériels complémentaires (capteurs / compteurs) + devis fournisseur | 🟡 en cours | [`materiel.md`](materiel.md) — références identifiées ; [`grille-diagnostic-plombier.md`](grille-diagnostic-plombier.md) |
 | T5 | Devis d'installation | ⏳ à faire | — |
 | T6 | Suivi des travaux, mise en œuvre logicielle et matérielle dans la plateforme ECAM | ⏳ à faire | — |
 | T7 | Rapport technique d'installation et d'exploitation | ⏳ à faire | — |
@@ -34,7 +34,7 @@ de données de consommation d'énergie.*
 | G2 | Objectifs, périmètre et critères de réussite | 🟡 amorcé | [`expression-besoins.md`](expression-besoins.md#7-critères-de-réussite-proposés-livrable-g2) |
 | G3 | Planning et jalons | 🟢 fait | [`planning-180h.md`](planning-180h.md), [`seances.csv`](seances.csv) |
 | G4 | Répartition des rôles et responsabilités | 🟡 amorcé | Équipe de deux : Paul Thiboult et Lilian Grot |
-| G5 | Analyse des risques et plan d'actions | 🟡 amorcé | [`materiel.md`](materiel.md), [`planning-180h.md`](planning-180h.md#chemin-critique) |
+| G5 | Analyse des risques et plan d'actions | 🟡 amorcé | [`prompt-gantt.md`](prompt-gantt.md) (registre R1–R12), [`planning-180h.md`](planning-180h.md#chemin-critique) |
 | G6 | Suivi d'avancement : réunions, comptes rendus, indicateurs | 🟡 en cours | [`reunion-2026-09-17.md`](reunion-2026-09-17.md) — compte rendu à produire après la réunion |
 | G7 | Suivi des ressources : matériel, logiciels, budget, temps | ⏳ à faire | — |
 | G8 | Gestion des évolutions et des modifications | ⏳ à faire | — |
