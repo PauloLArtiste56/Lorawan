@@ -5,18 +5,45 @@
 > données pour orienter la consultation ; **le choix définitif dépend des
 > diamètres relevés par le plombier**.
 
-## L'architecture conditionne les achats
+## Trois architectures possibles, à arbitrer sur devis
 
-Rappel de la décision : **compteur à sortie impulsion + nœud LoRaWAN séparé**,
-et non compteur à radio intégrée.
+| | Métrologie | Électronique dans la tuyauterie | Coût |
+|---|---|---|---|
+| **1. Mécanique à impulsion + nœud séparé** | R160 | Non — le nœud est au mur | Le plus bas |
+| **2. Ultrasonique à LoRaWAN intégré** | **R400 à R800** | Oui, et pile scellée | Le plus élevé |
+| 3. Ultrasonique à impulsion + nœud séparé | R400 à R800 | Oui quand même | Intermédiaire |
 
-La raison est propre à l'ECAM : toute intervention impose de vidanger le réseau
-en totalité. Avec un compteur à radio intégrée, l'électronique est *dans* la
-tuyauterie — une pile scellée en fin de vie ou une radio en panne imposerait une
-nouvelle vidange générale du site pour un seul appareil. Avec un nœud séparé, le
-boîtier est vissé au mur : on le remplace sans couper l'eau.
+### Ce qui sépare vraiment ces options
 
-Il faut donc acheter **deux choses distinctes** qui vont ensemble.
+**L'argument de la vidange ne distingue que l'option 1.** Un compteur ultrasonique
+porte de toute façon son électronique et sa pile dans le corps de compteur : que
+la radio soit intégrée ou déportée n'y change rien. Dès lors qu'on choisit
+l'ultrasonique, la contrainte de remplacement en fin de vie de pile — dix à
+quinze ans — est acceptée, et le LoRaWAN intégré ne coûte rien de plus de ce
+point de vue.
+
+**Le rapport R est l'argument inverse, et il est sérieux.** Un compteur mécanique
+R160 de Q3 = 2,5 m³/h ne garantit plus rien sous **15,6 L/h** ; un ultrasonique
+R800 descend à **3,1 L/h**. Sous ce seuil, un compteur mécanique ne tourne
+simplement pas : la fuite existe, passe dans le tuyau, et n'est comptée nulle
+part.
+
+Comme l'objet du projet est justement de détecter des écoulements continus de
+faible débit, **c'est un argument de fond en faveur de l'ultrasonique**, qu'il ne
+faut pas écarter par principe.
+
+### Recommandation
+
+**Demander les deux au devis** — option 1 et option 2 — et arbitrer sur des prix
+réels plutôt que sur des ordres de grandeur. Les éléments du choix :
+
+- si l'écart de prix est faible, l'ultrasonique se justifie par sa sensibilité ;
+- s'il est important, l'option 1 reste défendable : une fuite de chasse d'eau,
+  le cas qui motive le projet, se situe bien au-dessus de 15 L/h et sera vue par
+  un R160 ;
+- le **remplacement en fin de vie de pile** doit être chiffré dans les deux cas :
+  pour l'ultrasonique, c'est une vidange générale du site tous les dix à quinze
+  ans, à faire figurer au rapport d'exploitation (T7).
 
 ---
 
@@ -116,6 +143,33 @@ d'un registre pré-équipé, et place disponible en aval pour un compteur propre
 
 ---
 
+## D — Compteurs à LoRaWAN intégré
+
+Un seul appareil, aucun câblage, aucun nœud à installer. Métrologie très
+supérieure grâce à la mesure ultrasonique, sans pièce mobile.
+
+| Fabricant | Modèle | Diamètres | Remarque |
+|-----------|--------|-----------|----------|
+| **Diehl Metering** | [HYDRUS 2.0](https://www.diehl.com/metering/en/press-media/press-room/news/hydrus-20-the-state-of-the-art-domestic-smart-water-meter-now-available-with-lorawan%C2%AE-connectivity/) | DN15 à DN40 fileté, DN50+ à brides | **R800**, insensible au tartre, au sable et à l'air. [Gamme en France](https://www.compteur-energie.com/compteurs-eau-froide-sappel-hydrus.htm) |
+| **Axioma Metering** | [Qalcosonic W1](https://www.axiomametering.com/en/new/QalcosonicW1-smart-water-meter-now-LoRaWAN-certified-product) | DN15 et + | **Certifié LoRaWAN**, IP68, sensibilité aux faibles débits mise en avant. [Fiche](https://www.directindustry.com/prod/uab-axioma-metering/product-236911-2763266.html) |
+| **Itron** | [Intelis wSource](https://www.franceenvironnement.com/produit/1-intelis-wsource) | — | Ultrasonique, détection de fuite et d'air intégrée |
+
+⚠️ **Vérifier trois points avant de commander :**
+
+1. **LoRaWAN et non wM-Bus.** Ces gammes existent dans les deux versions, souvent
+   sous la même appellation commerciale. C'est le point de vigilance numéro un.
+2. **Le codec.** Chaque fabricant a son format de trame. Vérifier qu'un décodeur
+   JavaScript est fourni et compatible de la spécification TS013 attendue par
+   ChirpStack, faute de quoi il faudra l'écrire.
+3. **La pile.** Scellée, non remplaçable sur la plupart de ces modèles : sa fin de
+   vie impose de déposer le compteur, donc une vidange du réseau.
+
+**Ordre de grandeur** : nettement au-dessus d'un compteur mécanique — compter un
+facteur deux à quatre. À confirmer par devis, c'est précisément ce que l'arbitrage
+demande.
+
+---
+
 ## Chiffrage indicatif
 
 Hypothèse : 4 points de zone + télérelève de l'arrivée générale, nœuds regroupés
@@ -146,4 +200,6 @@ l'objet du devis du plombier.
 5. **Certification MID** annexe MI-001 ;
 6. Pour les nœuds : **LoRaWAN EU868, Class A, OTAA** — et surtout **pas wM-Bus**,
    qui émet dans la même bande mais n'est pas reçu par une passerelle LoRaWAN ;
-7. **Délai de livraison ferme** — c'est lui qui conditionne la date d'intervention.
+7. **Délai de livraison ferme** — c'est lui qui conditionne la date d'intervention ;
+8. **Chiffrer les deux architectures** : mécanique à impulsion avec nœud séparé,
+   et ultrasonique à LoRaWAN intégré. L'arbitrage se fait sur l'écart de prix réel.
