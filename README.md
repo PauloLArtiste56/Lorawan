@@ -54,6 +54,7 @@ base de données, on ne peut pas distinguer ce qui est à intégrer de ce qui es
 | [`docs/seances.csv`](docs/seances.csv) | Le calendrier des séances, exploitable par un tableur |
 | [`docs/taches-gantt.csv`](docs/taches-gantt.csv) | Les tâches du Gantt, à coller dans le classeur |
 | [`docs/prompt-gantt.md`](docs/prompt-gantt.md) | Prompts pour construire le classeur de suivi avec Claude pour Excel |
+| [`docs/etat-de-l-art-sommaire.md`](docs/etat-de-l-art-sommaire.md) | **Sommaire de l'état de l'art v2**, soumis à validation des encadrants |
 | [`docs/etat-de-l-art.md`](docs/etat-de-l-art.md) | **État de l'art** : comptage, transmission, propagation, détection de fuites — avec références |
 | [`docs/Etat-de-l-art.docx`](docs/Etat-de-l-art.docx) | La version condensée en Word sur 4 pages, pour le dossier |
 | [`docs/materiel.md`](docs/materiel.md) | **Références matériel** : compteurs à impulsion, nœuds LoRaWAN, chiffrage, checklist fournisseur |
