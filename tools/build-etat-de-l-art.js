@@ -135,7 +135,7 @@ const doc = new Document({
       p("Une fuite de bâtiment — typiquement une chasse d'eau qui coule — est invisible à l'usage mais possède deux propriétés qui la rendent détectable par la mesure : elle est continue, y compris la nuit, et stable, donc elle décale le niveau de base sans déformer le profil de consommation."),
 
       h("2.1  La classe métrologique", 2),
-      p("Un compteur n'a pas une précision uniforme sur toute sa plage. Il est caractérisé par le rapport R = Q3/Q1, normalisé par EN ISO 4064 et OIML R49 [1] et repris par la directive MID [2]. Les valeurs normalisées sont R40, R80, R160, R200, R400, R630 et R1000 ; R160 correspond à l'ancienne classe C."),
+      p("Un compteur n'a pas une précision uniforme sur toute sa plage. Il est caractérisé par le rapport R = Q3/Q1, normalisé par EN ISO 4064 et OIML R49 [1] et repris par la directive MID [2]. Le rapport R se choisit dans la série normalisée 40, 50, 63, 80, 100, 125, 160, 200, 250, 315, 400, 500, 630, 800, 1000 ; R160 correspond à l'ancienne classe C."),
       table([1500, 4200, 4046], ["Débit", "Définition", "Relation"], [
         ["Q1", "Débit minimal garanti", "Q3 / R"],
         ["Q2", "Débit de transition", "1,6 × Q1"],

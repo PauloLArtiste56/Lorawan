@@ -86,8 +86,11 @@ Ce classement est défini par la norme **EN ISO 4064** et la recommandation
 (annexe MI-001). Il a remplacé l'ancien classement en classes A, B et C — la
 classe **R160 correspond à l'ancienne classe C**.
 
-Les valeurs normalisées du rapport sont **R40, R80, R160, R200, R400, R630 et
-R1000** [1][2][3]. Quatre débits caractérisent le compteur :
+Le rapport R se choisit dans la série de nombres normaux **40, 50, 63, 80, 100,
+125, 160, 200, 250, 315, 400, 500, 630, 800, 1000** [1][2][3]. R160 est la
+valeur la plus courante sur les compteurs mécaniques ; les valeurs supérieures
+à R400 se rencontrent surtout sur les compteurs statiques. Quatre débits
+caractérisent le compteur :
 
 | Débit | Définition | Relation |
 |-------|------------|----------|
