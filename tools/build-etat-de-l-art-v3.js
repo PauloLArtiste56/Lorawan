@@ -179,19 +179,19 @@ const contenu = [
   h2("3.2.  Familles de compteurs et principes de mesure"),
   p([t("Les "), g("compteurs mécaniques"), t(" mesurent la rotation d'une turbine ; les modèles à jets multiples, les plus courants en bâtiment, vont de R80 à R160, et jusqu'à R250 pour les plus récents. Les "), g("compteurs ultrasoniques"), t(", sans pièce mobile, atteignent "), g("R400 à R800"), t(" et voient quelques litres par heure ; en contrepartie, leur pile est logée dans le compteur, dont elle impose le remplacement en fin de vie.")]),
   p([t("Un compteur ne transmet rien par lui-même. L'index en sort par une "), g("sortie à impulsions"), t(" (un contact tous les P litres, option à préciser à la commande), par un "), g("module clipsable"), t(" à lecture inductive, par un encodeur filaire, ou par une "), g("radio intégrée"), t(" LoRaWAN ou wM-Bus.")]),
-  p([t("Plusieurs approches évitent de toucher à la plomberie. La "), g("lecture par caméra"), t(", comme le Dragino AIS01, photographie le cadran et en reconnaît les chiffres [23] ; elle s'adapte à tout compteur existant, mais chaque prise de vue coûte de l'énergie, ce qui espace les lectures au point de compromettre l'analyse nocturne. Les débitmètres à pince sont peu précis aux faibles débits, et les capteurs optiques visent surtout les compteurs électriques [25].")]),
+  p([t("Plusieurs approches évitent de toucher à la plomberie. La "), g("lecture par caméra"), t(", comme le Dragino AIS01, photographie le cadran et en reconnaît les chiffres [23] ; elle s'adapte à tout compteur existant, mais chaque prise de vue coûte de l'énergie, ce qui espace les lectures au point de compromettre l'analyse nocturne. Les "), g("débitmètres ultrasoniques à pince"), t(" se posent sur le tuyau sans le couper, donc sans vidange ; un modèle LoRaWAN récent, le Thermokon CubicMeter, annonce une détection des fuites dès quelques litres par heure, mais il se limite aux tubes de cuivre ou de plastique de 15 à 25 mm et s'appuie sur la plateforme du fabricant pour les petites fuites [26]. Les capteurs optiques, enfin, visent surtout les compteurs électriques [25].")]),
   p([t("Les "), g("détecteurs de présence d'eau"), t(", sonde, câble ou membrane, comme la gamme distribuée par Airicom [24], forment une famille complémentaire : ils signalent de l'eau à un endroit précis, mais "), g("ne voient pas la fuite la plus courante"), t(", une chasse d'eau qui coule directement à l'égout. Leur intérêt est ailleurs : posés en sous-plafond sous une canalisation, ils repéreraient une fuite du réseau lui-même.")]),
 
   h2("3.3.  Critères de comparaison"),
   table([1900, 1548, 1548, 1548, 1547, 1547],
     ["Critère", "Mécanique, impulsions et nœud", "Mécanique, radio intégrée", "Ultrasonique, radio intégrée", "Lecture par caméra", "Ultrasons à pince"], [
-    ["Plage de mesure", "R80 à R250", "R160 à R250", "R400 à R800", "Celle du compteur lu", "Faible en bas de plage"],
+    ["Plage de mesure", "R80 à R250", "R160 à R250", "R400 à R800", "Celle du compteur lu", "Jusqu'à 3 m³/h, petits tubes"],
     ["Perte de charge", "Notable", "Notable", "Faible", "Aucune", "Aucune"],
     ["Pose", "Vidange", "Vidange", "Vidange", "Sans intervention", "Sans coupure"],
-    ["Coût d'achat", "Faible, plus le nœud", "Moyen", "Élevé", "Moyen", "Élevé"],
+    ["Coût d'achat", "Faible, plus le nœud", "Moyen", "Élevé", "Moyen", "À chiffrer"],
     ["Maintenance", "Nœud remplaçable seul", "Pile : dépose du compteur", "Pile : dépose du compteur", "Nettoyage du cadran", "Recalage"],
     ["Données", "Format libre", "Format fabricant", "Parfois chiffré", "Format fabricant", "Format fabricant"],
-    ["Voit une fuite de 6 à 25 L/h", "Selon R et impulsion", "En limite à R250", "Oui", "Lectures trop espacées", "Non"],
+    ["Voit une fuite de 6 à 25 L/h", "Selon R et impulsion", "En limite à R250", "Oui", "Lectures trop espacées", "Annoncé par le fabricant"],
   ], { alerte: [6] }),
   legende("Tableau 3. Comparaison des familles de compteurs"),
 
@@ -254,6 +254,7 @@ const contenu = [
   ref(23, [rt("Dragino, "), lien("AIS01, lecture de compteur par caméra", "https://www.integral-system.fr/shop/products/capteur-ia-pre-entraine-de-lecture-de-compteur-avec-camera-integree"), rt(".")]),
   ref(24, [rt("Airicom, "), lien("détecteurs de fuite LoRaWAN Milesight", "https://airicom.com/applications/surveillance-maintenance/fuite-d-eau-ou-de-gaz/"), rt(".")]),
   ref(25, [rt("Watteco, Flash'O et Humid'O, "), lien("airicom.com", "https://airicom.com/Fournisseurs/Watteco/"), rt(".")]),
+  ref(26, [rt("Thermokon, "), lien("CubicMeter LoRaWAN, débitmètre et détecteur de fuite à pince", "https://www.thermokon.de/direct/en-gb/categories/cubicmeter-lorawan"), rt(", distribué par EBDS.")]),
 ];
 
 // ───────────────────────── document ─────────────────────────

@@ -1,143 +1,99 @@
 const fs = require("fs");
 const {
   Document, Packer, Paragraph, TextRun, ExternalHyperlink,
-  Table, TableRow, TableCell, WidthType, ShadingType, BorderStyle, convertInchesToTwip,
+  Table, TableRow, TableCell, WidthType, ShadingType, BorderStyle,
 } = require("docx");
 
-const W = 15110;
+const W = 15400;
 const ENCRE = "1F2933", GRIS = "5B6770", ACCENT = "0B5563";
-const FOND_TETE = "0B5563", FOND_CLAIR = "EDF2F4", FOND_RETENU = "E3F0E6";
+const FOND_TETE = "0B5563", FOND_CLAIR = "EDF2F4", FOND_NOUVEAU = "E3F0E6", FOND_ALERTE = "FDF3E7";
 
-const nb = (t, o = {}) => new TextRun({ text: t, font: "Calibri", size: 18, color: ENCRE, ...o });
-const p = (t, o = {}) => new Paragraph({
-  children: Array.isArray(t) ? t : [nb(t)],
-  spacing: { after: 85, line: 244 }, ...o,
-});
-const ct = (t, o = {}) => new TextRun({ text: t, font: "Calibri", size: 16, color: ENCRE, ...o });
+const nb = (t, o = {}) => new TextRun({ text: t, font: "Calibri", size: 17, color: ENCRE, ...o });
+const p = (t, o = {}) => new Paragraph({ children: Array.isArray(t) ? t : [nb(t)], spacing: { after: 60, line: 240 }, ...o });
+const ct = (t, o = {}) => new TextRun({ text: t, font: "Calibri", size: 15, color: ENCRE, ...o });
 const cl = (t, url) => new ExternalHyperlink({ link: url,
-  children: [new TextRun({ text: t, font: "Calibri", size: 16, color: ACCENT, underline: {} })] });
+  children: [new TextRun({ text: t, font: "Calibri", size: 15, color: ACCENT, underline: {} })] });
 
 function cell(contenu, width, { tete = false, gras = false, fond = null } = {}) {
-  const enfants = Array.isArray(contenu)
-    ? contenu
-    : [new TextRun({ text: contenu, font: "Calibri", size: 16,
-        bold: tete || gras, color: tete ? "FFFFFF" : ENCRE })];
+  const lignes = Array.isArray(contenu) ? [contenu] : String(contenu).split("\n").map((l) => [ct(l, { bold: tete || gras, color: tete ? "FFFFFF" : ENCRE })]);
   return new TableCell({
     width: { size: width, type: WidthType.DXA },
-    shading: tete ? { type: ShadingType.CLEAR, fill: FOND_TETE }
-           : fond ? { type: ShadingType.CLEAR, fill: fond } : undefined,
-    margins: { top: 70, bottom: 70, left: 95, right: 95 },
-    children: [new Paragraph({ spacing: { after: 0, line: 228 }, children: enfants })],
+    shading: tete ? { type: ShadingType.CLEAR, fill: FOND_TETE } : fond ? { type: ShadingType.CLEAR, fill: fond } : undefined,
+    margins: { top: 50, bottom: 50, left: 80, right: 80 },
+    children: lignes.map((enf) => new Paragraph({ keepNext: true, spacing: { after: 0, line: 222 }, children: enf })),
   });
 }
 
 function table(cols, entetes, lignes, opts = {}) {
-  const rows = [new TableRow({
-    tableHeader: true,
-    children: entetes.map((t, i) => cell(t, cols[i], { tete: true })),
-  })];
+  const rows = [new TableRow({ tableHeader: true, children: entetes.map((e, k) => cell(e, cols[k], { tete: true })) })];
   lignes.forEach((l, n) => {
-    const fond = (opts.retenu || []).includes(n) ? FOND_RETENU : (n % 2 === 1 ? FOND_CLAIR : null);
-    rows.push(new TableRow({
-      cantSplit: true,
-      children: l.map((t, i) => cell(t, cols[i], { fond, gras: i === 0 })),
-    }));
+    const fond = (opts.nouveau || []).includes(n) ? FOND_NOUVEAU
+               : (opts.alerte || []).includes(n) ? FOND_ALERTE
+               : (n % 2 === 1 ? FOND_CLAIR : null);
+    rows.push(new TableRow({ cantSplit: true, children: l.map((v, k) => cell(v, cols[k], { fond, gras: k === 0 })) }));
   });
   return new Table({
     columnWidths: cols, width: { size: W, type: WidthType.DXA }, rows,
     borders: {
-      top:    { style: BorderStyle.SINGLE, size: 2, color: "C3CED4" },
-      bottom: { style: BorderStyle.SINGLE, size: 2, color: "C3CED4" },
-      left:   { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE },
-      insideHorizontal: { style: BorderStyle.SINGLE, size: 2, color: "D9E1E5" },
-      insideVertical:   { style: BorderStyle.NONE },
+      top: { style: BorderStyle.SINGLE, size: 2, color: "C3CED4" }, bottom: { style: BorderStyle.SINGLE, size: 2, color: "C3CED4" },
+      left: { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE },
+      insideHorizontal: { style: BorderStyle.SINGLE, size: 2, color: "D9E1E5" }, insideVertical: { style: BorderStyle.NONE },
     },
   });
 }
 
+const titre = (s) => new Paragraph({ spacing: { before: 160, after: 80 }, keepNext: true,
+  children: [new TextRun({ text: s, font: "Calibri", size: 22, bold: true, color: ACCENT })] });
+
 const doc = new Document({
-  styles: { default: { document: { run: { font: "Calibri", size: 18, color: ENCRE } } } },
+  styles: { default: { document: { run: { font: "Calibri", size: 17, color: ENCRE } } } },
   sections: [{
-    properties: {
-      page: {
-        size: { width: 16838, height: 11906 },
-        margin: { top: convertInchesToTwip(0.6), bottom: convertInchesToTwip(0.5),
-                  left: convertInchesToTwip(0.6), right: convertInchesToTwip(0.6) },
-      },
-    },
+    properties: { page: { size: { width: 16838, height: 11906 }, margin: { top: 680, bottom: 620, left: 720, right: 720 } } },
     children: [
-      new Paragraph({
-        spacing: { after: 20 },
-        children: [new TextRun({ text: "Comparatif des options matérielles", font: "Calibri", size: 32, bold: true, color: ACCENT })],
-      }),
-      new Paragraph({
-        spacing: { after: 50 },
-        children: [new TextRun({ text: "Sous-comptage de la consommation d'eau à l'ECAM — les cinq options recommandées par Wi6Labs",
-          font: "Calibri", size: 20, color: GRIS })],
-      }),
-      new Paragraph({
-        spacing: { after: 160 },
+      new Paragraph({ spacing: { after: 20 },
+        children: [new TextRun({ text: "Comparatif du matériel de comptage", font: "Calibri", size: 30, bold: true, color: ACCENT })] }),
+      new Paragraph({ spacing: { after: 120 },
         border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: ACCENT, space: 5 } },
-        children: [new TextRun({
-          text: "PRI 2026-2027  ·  DAISI  ·  P. Thiboult et L. Grot  ·  Encadrants : I. Martinez et D. Boiteau",
-          font: "Calibri", size: 15, color: GRIS })],
-      }),
+        children: [new TextRun({ text: "PRI 2026-2027  ·  DAISI  ·  P. Thiboult et L. Grot  ·  Références Wi6Labs, devis Airicom du 24/09/2026, piste EBDS",
+          font: "Calibri", size: 15, color: GRIS })] }),
 
-      table([2750, 2250, 1900, 2750, 4060, 1400],
-        ["Option", "Type de compteur", "Classe R", "Décodeur pour ChirpStack", "Lien", "Prix HT"], [
+      titre("1.  Compteurs : mesurer la consommation"),
+      table([2050, 1500, 1750, 1500, 1500, 1500, 1950, 1450, 2200],
+        ["Option", "Technologie", "Débit minimal garanti à DN25 (classe R)", "Voit une fuite de chasse d'eau (6 à 25 L/h)", "Diamètres", "Pose", "Données", "Prix HT unitaire", "Lien"], [
+        ["1. B-meters GMDM-I + module IWM-LR3\nWi6Labs", "Mécanique, jets multiples", "63 L/h horizontal\n126 L/h vertical\n(R100 / R50)", "Non", "DN15 à DN50", "Vidange\n2 équipements", "LoRaWAN, décodeur fourni", "Devis à demander",
+          [cl("Compteur", "https://www.compteur-energie.com/compteur-eau-froide-dn15-a-dn50.htm"), ct("  ·  "), cl("Module LR3", "https://www.bmeters.com/en/products/iwm-lr3/")]],
+        ["2. B-meters HYDRODIGIT S1 ou M1\nWi6Labs", "Mécanique, totalisateur électronique", "25 L/h\n(R250)", "En limite", "S1 : DN15 à DN20\nM1 : DN15 à DN50", "Vidange", "LoRaWAN et wM-Bus intégrés, décodeur fourni", "Devis à demander",
+          [cl("S1", "https://www.compteur-energie.com/compteur-eau-froide-mid-r250-b-meters-hydrodigit.htm"), ct("  ·  "), cl("M1", "https://www.sferaco.com/fr/1796-compteur-jets-multiples-digital-eau-froide-hydrodigit-m1-loraplusmbus-radio.html")]],
+        ["3. Diehl HYDRUS 2.0\nWi6Labs", "Ultrasonique", "8 à 25 L/h\n(R800 à R250 selon version)", "Oui en R800", "DN15 à DN40", "Vidange", "LoRaWAN, trame OMS chiffrée : clé AES par compteur", "Devis à demander",
+          [cl("diehl.com", "https://www.diehl.com/metering/en/products-solutions/products/water-metering/hydrus-20-de/")]],
+        ["4. Zenner IUW + module EDC B.One\nWi6Labs", "Ultrasonique", "16 L/h\n(R400, à confirmer)", "Oui", "Gros calibres ; IUWS pour les petits, à confirmer", "Vidange\n2 équipements", "LoRaWAN, décodeurs publics sur GitHub", "Devis à demander",
+          [cl("Compteur", "https://zenner.com/products/gwz_iuw-2/"), ct("  ·  "), cl("Module", "https://zenner.com/products/sys_edc_communication_module-2/")]],
+        ["5. Compteur à impulsions + Watteco Pulse SENS'O\nWi6Labs et Airicom", "Au choix : mécanique ou ultrasonique", "Selon le compteur choisi", "Selon le compteur et le poids d'impulsion", "Tous", "Vidange\n2 équipements, nœud jusqu'à 3 compteurs", "LoRaWAN, format Watteco déjà connu", "Nœud : 139 €\n(devis Airicom)\nCompteur : à chiffrer",
+          [cl("Pulse SENS'O", "https://www.watteco.fr/produit/capteur-pulse-senso-lorawan/")]],
+        ["6. Thermokon CubicMeter\nEBDS, nouvelle piste", "Ultrasonique à pince, posé sur le tuyau", "Fuite annoncée dès 1 à 9 L/h\nDébit max 3 125 L/h", "Oui, selon le fabricant", "Tubes de 15 à 25 mm : cuivre, PE, multicouche", "Sans coupure ni vidange", "LoRaWAN ; détection fine via la plateforme du fabricant", "Devis à demander",
+          [cl("EBDS", "https://www.ebds.eu/fiche_produit/cubicmeter-thermokon-capteur-debit-eau-lorawan"), ct("  ·  "), cl("Thermokon", "https://www.thermokon.de/direct/en-gb/categories/cubicmeter-lorawan")]],
+      ], { alerte: [0], nouveau: [5] }),
 
-        ["1.  B-meters GMDM-I + module IWM-LR3",
-         "Multi-jet mécanique",
-         "R160 horizontal\nR50 vertical\n(39 à 126 L/h à DN25)",
-         "Fourni par le fabricant",
-         [cl("compteur-energie.com — GMDM-I DN15 à DN50", "https://www.compteur-energie.com/compteur-eau-froide-dn15-a-dn50.htm"),
-          ct("\nModule : "), cl("bmeters.com — IWM-LR3", "https://www.bmeters.com/en/products/iwm-lr3/")],
-         ""],
+      p([nb("Lecture. ", { bold: true }), nb("Le débit minimal garanti est le débit Q1 = Q3/R, calculé à DN25 pour comparer sur la même base. Une chasse d'eau qui fuit perd 6 à 25 L/h selon le Centre d'information sur l'eau : un compteur dont le débit minimal est supérieur ne la voit pas de façon fiable.")],
+        { spacing: { before: 80, after: 60, line: 240 } }),
 
-        ["2.  B-meters HYDRODIGIT-M1",
-         "Multi-jet mécanique, totalisateur électronique",
-         "R250\n(25 L/h à DN25)",
-         "Fourni par le fabricant",
-         [cl("compteur-energie.com — HYDRODIGIT MID R250", "https://www.compteur-energie.com/compteur-eau-froide-mid-r250-b-meters-hydrodigit.htm"),
-          ct("\nFiche : "), cl("bmeters.com — HYDRODIGIT-M1", "https://www.bmeters.com/en/products/hydrodigit-m1/")],
-         ""],
+      titre("2.  Détecteurs de fuite : signaler de l'eau là où elle ne doit pas être"),
+      table([2400, 2500, 2700, 2900, 2700, 2200],
+        ["Capteur", "Principe", "Ce qu'il détecte", "Ce qu'il ne voit pas", "Usage possible à l'ECAM", "Où l'acheter"], [
+        ["Milesight EM300-SLD", "Sonde ponctuelle inox", "Eau au sol dès 5 mm de hauteur", "Une chasse d'eau qui fuit : l'eau part à l'égout", "Pied de compteur, local technique", [cl("Airicom", "https://airicom.com/applications/surveillance-maintenance/fuite-d-eau-ou-de-gaz/")]],
+        ["Milesight EM300-ZLD", "Câble de détection de 3 m", "Eau sur tout le linéaire du câble", "Idem", "Le long d'une canalisation en sous-plafond", [cl("EBDS", "https://www.ebds.eu/fiche_produit/em300-zld-milesight-detecteur-lorawan-de-fuites-d-eau-par-zone"), ct("  ·  "), cl("Airicom", "https://airicom.com/applications/surveillance-maintenance/fuite-d-eau-ou-de-gaz/")]],
+        ["Milesight EM300-MLD", "Membrane de 40 × 40 cm", "Eau sur une surface", "Idem", "Sous un point sensible, sur une dalle de faux plafond", [cl("Airicom", "https://airicom.com/Milesight-EM300-MLD-Detecteur-de-fuite-d-eau-LoRaWAN-avec-membrane/EM300-MLD")]],
+        ["Watteco Humid'O", "Détection au sol", "Eau au sol", "Idem", "Local technique", [cl("Airicom", "https://airicom.com/Fournisseurs/Watteco/")]],
+      ]),
+      p([nb("Complémentaires, pas concurrents. ", { bold: true }), nb("Un compteur dit qu'un débit anormal existe quelque part dans une zone ; un détecteur dit qu'il y a de l'eau à un endroit précis. Aucun détecteur ne remplace le sous-comptage, puisque la fuite la plus courante ne met jamais d'eau au sol.")],
+        { spacing: { before: 80, after: 60, line: 240 } }),
 
-        ["3.  Diehl HYDRUS 2.0",
-         "Ultrasonique",
-         "R800\n(8 L/h à DN25)",
-         "Trame OMS chiffrée : il faut en plus une clé AES par compteur",
-         [cl("diehl.com — HYDRUS 2.0", "https://www.diehl.com/metering/en/products-solutions/products/water-metering/hydrus-20-de/"),
-          ct("\nDevis à demander")],
-         ""],
-
-        ["4.  Zenner IUW + module EDC B.One",
-         "Ultrasonique",
-         "R400\n(16 L/h à DN25)",
-         "Décodeurs publics sur GitHub, vérifiables avant achat",
-         [cl("zenner.com — IUW", "https://zenner.com/products/gwz_iuw-2/"),
-          ct("\nModule : "), cl("EDC B.One", "https://zenner.com/products/sys_edc_communication_module-2/"),
-          ct("\nCodecs : "), cl("github.com/ZennerIoT", "https://github.com/ZennerIoT/element-parsers")],
-         ""],
-
-        ["5.  Compteur à impulsions (toute marque) + nœud Watteco Pulse SENS'O",
-         "Au choix",
-         "Selon le compteur retenu",
-         "Aucun problème : le format est défini par nous",
-         [cl("watteco.fr — Pulse SENS'O IP55", "https://www.watteco.fr/produit/capteur-pulse-senso-lorawan/"),
-          ct("\nRevendeur : "), cl("Domo-Supply", "https://shop.domo-supply.com/fr/smart-city-/2237-watteco-capteur-exterieur-pour-telereleve-de-compteur-pulse-sens-o-lorawan.html")],
-         ""],
-      ], { retenu: [1] }),
-
-      new Paragraph({ spacing: { after: 150 }, children: [] }),
-
-      p([nb("Classe R : ", { bold: true }), nb("entre parenthèses, le plus petit débit que le compteur garantit, calculé à DN25 pour comparer sur la même base. Une chasse d'eau qui fuit, c'est 20 à 100 L/h.")]),
-      p([nb("Recommandation : l'option 2", { bold: true }), nb(" — meilleure classe que l'option 1, un seul équipement, DN15 à DN50. Vérifier avant commande qu'il s'agit bien de la version LoRaWAN et non wM-Bus, et du modèle M1 et non S1.")]),
-
+      titre("3.  À retenir"),
+      p([nb("Prix. ", { bold: true }), nb("Seul le Pulse SENS'O a un prix ferme : 139 € HT l'unité, plus 30 € de port, devis Airicom EST-017026 valable jusqu'au 24/10/2026. Les autres prix restent à demander.")]),
+      p([nb("Airicom ", { bold: true }), nb("vend des capteurs d'impulsions, pas de compteurs : son offre correspond à l'option 5, qui demande en plus un compteur à sortie impulsions, à commander avec cette option.")]),
+      p([nb("Le CubicMeter ", { bold: true }), nb("est la seule option qui supprime la vidange. Trois vérifications avant de le retenir : le matériau et le diamètre réels des tubes en sous-plafond, le débit de pointe de chaque zone, qui doit rester sous 3 125 L/h, et la dépendance à la plateforme du fabricant pour la détection des petites fuites.")]),
     ],
   }],
 });
 
-Packer.toBuffer(doc).then((b) => {
-  fs.writeFileSync("/home/user/Lorawan/docs/Comparatif-materiel.docx", b);
-  console.log("écrit :", b.length, "octets");
-});
+Packer.toBuffer(doc).then((b) => { fs.writeFileSync("/home/user/Lorawan/docs/Comparatif-materiel.docx", b); console.log("écrit :", b.length, "octets"); });
