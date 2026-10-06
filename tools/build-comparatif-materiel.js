@@ -77,16 +77,12 @@ const doc = new Document({
       p([nb("Lecture. ", { bold: true }), nb("Le débit minimal garanti est le débit Q1 = Q3/R, calculé à DN25 pour comparer sur la même base. Une chasse d'eau qui fuit perd 6 à 25 L/h selon le Centre d'information sur l'eau : un compteur dont le débit minimal est supérieur ne la voit pas de façon fiable.")],
         { spacing: { before: 80, after: 60, line: 240 } }),
 
-      titre("2.  Détecteurs de fuite : signaler de l'eau là où elle ne doit pas être"),
-      table([2400, 2500, 2700, 2900, 2700, 2200],
-        ["Capteur", "Principe", "Ce qu'il détecte", "Ce qu'il ne voit pas", "Usage possible à l'ECAM", "Où l'acheter"], [
-        ["Milesight EM300-SLD", "Sonde ponctuelle inox", "Eau au sol dès 5 mm de hauteur", "Une chasse d'eau qui fuit : l'eau part à l'égout", "Pied de compteur, local technique", [cl("Airicom", "https://airicom.com/applications/surveillance-maintenance/fuite-d-eau-ou-de-gaz/")]],
-        ["Milesight EM300-ZLD", "Câble de détection de 3 m", "Eau sur tout le linéaire du câble", "Idem", "Le long d'une canalisation en sous-plafond", [cl("EBDS", "https://www.ebds.eu/fiche_produit/em300-zld-milesight-detecteur-lorawan-de-fuites-d-eau-par-zone"), ct("  ·  "), cl("Airicom", "https://airicom.com/applications/surveillance-maintenance/fuite-d-eau-ou-de-gaz/")]],
-        ["Milesight EM300-MLD", "Membrane de 40 × 40 cm", "Eau sur une surface", "Idem", "Sous un point sensible, sur une dalle de faux plafond", [cl("Airicom", "https://airicom.com/Milesight-EM300-MLD-Detecteur-de-fuite-d-eau-LoRaWAN-avec-membrane/EM300-MLD")]],
-        ["Watteco Humid'O", "Détection au sol", "Eau au sol", "Idem", "Local technique", [cl("Airicom", "https://airicom.com/Fournisseurs/Watteco/")]],
-      ]),
-      p([nb("Complémentaires, pas concurrents. ", { bold: true }), nb("Un compteur dit qu'un débit anormal existe quelque part dans une zone ; un détecteur dit qu'il y a de l'eau à un endroit précis. Aucun détecteur ne remplace le sous-comptage, puisque la fuite la plus courante ne met jamais d'eau au sol.")],
-        { spacing: { before: 80, after: 60, line: 240 } }),
+      titre("2.  Détecteurs de fuite : piste Airicom et EBDS"),
+      p([nb("Airicom et EBDS proposent des détecteurs de présence d'eau : sonde ponctuelle, câble de 3 m ou membrane, comme les Milesight EM300-SLD, EM300-ZLD et EM300-MLD ou le Watteco Humid'O. Ils signalent de l'eau au sol, mais "),
+         nb("ne voient pas la fuite la plus courante", { bold: true }),
+         nb(" : une chasse d'eau qui fuit s'écoule directement à l'égout. Ils ne remplacent donc pas le sous-comptage. Ils ne sont pas retenus à ce stade ; ils pourraient compléter le dispositif sous une canalisation en sous-plafond. "),
+         cl("Airicom", "https://airicom.com/applications/surveillance-maintenance/fuite-d-eau-ou-de-gaz/"), ct("  ·  "),
+         cl("EBDS", "https://www.ebds.eu/fiche_produit/em300-zld-milesight-detecteur-lorawan-de-fuites-d-eau-par-zone")]),
 
       titre("3.  À retenir"),
       p([nb("Prix. ", { bold: true }), nb("Seul le Pulse SENS'O a un prix ferme : 139 € HT l'unité, plus 30 € de port, devis Airicom EST-017026 valable jusqu'au 24/10/2026. Les autres prix restent à demander.")]),
