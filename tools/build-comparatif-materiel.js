@@ -72,7 +72,9 @@ const doc = new Document({
           [cl("Pulse SENS'O", "https://www.watteco.fr/produit/capteur-pulse-senso-lorawan/")]],
         ["6. Thermokon CubicMeter\nEBDS, nouvelle piste", "Ultrasonique à pince, posé sur le tuyau", "Fuite annoncée dès 1 à 9 L/h\nDébit max 3 125 L/h", "Oui, selon le fabricant", "Tubes de 15 à 25 mm : cuivre, PE, multicouche", "Sans coupure ni vidange", "LoRaWAN ; détection fine via la plateforme du fabricant", "Devis à demander",
           [cl("EBDS", "https://www.ebds.eu/fiche_produit/cubicmeter-thermokon-capteur-debit-eau-lorawan"), ct("  ·  "), cl("Thermokon", "https://www.thermokon.de/direct/en-gb/categories/cubicmeter-lorawan")]],
-      ], { alerte: [0], nouveau: [5] }),
+        ["7. B-meters HYDROSONIC\nRetenu, hors liste Wi6Labs", "Ultrasonique", "16 L/h\n(R400 ; 13 L/h en R500)", "Oui", "DN15 à DN40", "Vidange", "LoRaWAN et wM-Bus intégrés, décodeur fourni", "Devis à demander",
+          [cl("Fiche produit", "https://bmetersuk.com/products/hydrosonic/")]],
+      ], { alerte: [0], nouveau: [6] }),
 
       p([nb("Lecture. ", { bold: true }), nb("Le débit minimal garanti est le débit Q1 = Q3/R, calculé à DN25 pour comparer sur la même base. Une chasse d'eau qui fuit perd 6 à 25 L/h selon le Centre d'information sur l'eau : un compteur dont le débit minimal est supérieur ne la voit pas de façon fiable.")],
         { spacing: { before: 80, after: 60, line: 240 } }),
