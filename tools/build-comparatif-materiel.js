@@ -92,6 +92,12 @@ const doc = new Document({
       p([nb("Prix. ", { bold: true }), nb("Seul le Pulse SENS'O a un prix ferme : 139 € HT l'unité, plus 30 € de port, devis Airicom EST-017026 valable jusqu'au 24/10/2026. Les autres prix restent à demander.")]),
       p([nb("Airicom ", { bold: true }), nb("vend des capteurs d'impulsions, pas de compteurs : son offre correspond à l'option 5, qui demande en plus un compteur à sortie impulsions, à commander avec cette option.")]),
       p([nb("Le CubicMeter ", { bold: true }), nb("est la seule option qui supprime la vidange. Trois vérifications avant de le retenir : le matériau et le diamètre réels des tubes en sous-plafond, le débit de pointe de chaque zone, qui doit rester sous 3 125 L/h, et la dépendance à la plateforme du fabricant pour la détection des petites fuites.")]),
+
+      titre("4.  Choix retenu pour le moment"),
+      p([nb("Compteur sélectionné : B-meters HYDROSONIC, ", { bold: true }), nb("ultrasonique à radio LoRaWAN intégrée, R400 en standard et R500 sur demande, DN15 à DN40, pile de 13 ans, décodeur fourni par B-meters. "),
+         cl("Fiche produit", "https://bmetersuk.com/products/hydrosonic/")]),
+      p([nb("Pourquoi. ", { bold: true }), nb("C'est le seul compteur de la marque proposée par Wi6Labs qui voit une fuite de chasse d'eau : 16 L/h garantis à DN25 en R400, 13 L/h en R500, 10 L/h en DN20. Ses données ne sont pas chiffrées et il ne demande qu'un seul appareil par point. Second choix : le Diehl HYDRUS 2.0, plus fin encore, si Diehl confirme que les clés de chiffrement sont livrées avec les compteurs.")]),
+      p([nb("Sélection provisoire, devis à demander. ", { bold: true, color: "B5651D" }), nb("Demander un devis du HYDROSONIC en version LoRaWAN et R500, avec son fichier de décodeur. Le choix sera confirmé après le diagnostic du plombier : diamètres réels, qui doivent rester en DN40 au plus, et débit de pointe de chaque zone, pour retenir le plus petit calibre possible.")]),
     ],
   }],
 });
