@@ -201,8 +201,8 @@ const contenu = [
     ["Option", "Classe R", "Débit minimal garanti à DN25", "Voit une fuite de 6 à 25 L/h", "Radio", "Données"], [
     ["Jets multiples et module clipsable", "R100 H, R50 V", "63 à 126 L/h", "Non", "LoRaWAN", "Décodeur fourni"],
     ["Mécanique à totalisateur électronique", "R250", "25 L/h", "En limite", "Selon version", "Décodeur fourni"],
-    ["Ultrasonique, radio intégrée", "R800", "8 L/h", "Oui", "LoRaWAN", "Chiffré, clé par compteur"],
-    ["Ultrasonique, module clipsable", "R400", "16 L/h", "Oui", "LoRaWAN", "Décodeurs publics"],
+    ["Ultrasonique, radio intégrée, trame chiffrée", "Jusqu'à R800", "8 L/h", "Oui", "LoRaWAN", "Chiffré, clé par compteur"],
+    ["Ultrasonique, radio intégrée, décodeurs publics", "R250 à R800", "16 L/h en R400", "Oui", "LoRaWAN", "Décodeurs publics"],
     ["Compteur à impulsions et nœud", "Selon compteur", "Selon compteur", "Selon R et impulsion", "LoRaWAN", "Format libre"],
   ], { alerte: [0] }),
   legende("Tableau 4. Options envisagées pour l'ECAM, détaillées dans le comparatif matériel"),
