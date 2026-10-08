@@ -10,7 +10,7 @@ const {
 
 const ENCRE = "1F2933", GRIS = "5B6770", ACCENT = "0B5563", FOND = "EDF2F4";
 const DOSSIER = path.join(__dirname, "..", "docs", "img-tuto-nanocad");
-const LARGEUR_MAX = 560; // px
+const LARGEUR_MAX = 500; // px
 
 const nb = (t, o = {}) => new TextRun({ text: t, font: "Calibri", size: 21, color: ENCRE, ...o });
 const p = (enf, o = {}) => new Paragraph({ children: Array.isArray(enf) ? enf : [nb(enf)], spacing: { after: 100 }, ...o });
@@ -73,28 +73,26 @@ const contenu = [
   ...image(4, "page de téléchargement de nanoCAD Free"),
   etape(6, "Lancer le fichier téléchargé. L'assistant d'installation de nanoCAD 5.0 s'ouvre : cliquer sur « Suivant »."),
   ...image(5, "accueil de l'assistant d'installation", 380),
-  etape(7, "Accepter le contrat de licence, puis cliquer sur « Suivant »."),
-  ...image(6, "contrat de licence"),
-  etape(8, "Saisir le numéro de série quand il est demandé."),
-  ...image(7, "écran de saisie du numéro de série"),
-  etape(9, "Laisser le dossier d'installation par défaut, lancer l'installation, puis cliquer sur « Terminer »."),
-  ...image(8, "fin de l'installation"),
+  etape(7, "Fenêtre « Contrat de Licence d'Utilisateur Final » : cocher « J'accepte les termes de ce Contrat de Licence », puis cliquer sur « Suivant »."),
+  etape(8, "Si l'installateur demande le numéro de série, copier celui de la carte « nanoCAD 5 Free » de l'espace personnel (format NC5NVAS-…). S'il ne le demande pas, il sera saisi à l'activation (partie 4)."),
+  etape(9, "Laisser le dossier d'installation proposé par défaut et cliquer sur « Suivant », puis sur « Installer ». Windows peut demander d'autoriser l'application à modifier l'ordinateur : répondre « Oui »."),
+  etape(10, "Attendre la fin de la copie des fichiers (quelques minutes), puis cliquer sur « Terminer ». Un raccourci nanoCAD est créé sur le bureau et dans le menu Démarrer."),
 
   titre("4. Activer la licence"),
-  etape(10, "Lancer nanoCAD. L'assistant d'enregistrement s'ouvre au premier démarrage."),
-  ...image(9, "assistant d'enregistrement"),
-  etape(11, "Saisir le numéro de série si besoin, puis s'identifier avec l'adresse e-mail et le mot de passe du compte nanocad.com. L'assistant récupère la licence en ligne."),
-  ...image(10, "fenêtre d'identification"),
-  etape(12, "Terminer l'assistant. Pour vérifier, ouvrir le menu Aide, puis « À propos »."),
-  ...image(11, "licence active"),
+  etape(11, "Lancer nanoCAD. Au premier démarrage, l'assistant d'enregistrement s'ouvre. S'il ne s'ouvre pas, le lancer depuis le menu Démarrer (dossier Nanosoft) ou depuis le menu Aide de nanoCAD."),
+  etape(12, "Choisir l'option qui demande une licence avec le numéro de série, coller le numéro de série, puis cliquer sur « Suivant »."),
+  etape(13, "S'identifier avec l'adresse e-mail et le mot de passe du compte nanocad.com (les mêmes qu'à l'étape 2). L'assistant se connecte au serveur nanoCAD, récupère la licence et l'installe automatiquement."),
+  etape(14, "Cliquer sur « Terminer ». nanoCAD s'ouvre avec la licence active."),
+  etape(15, "Pour vérifier : menu Aide, puis « À propos ». Le fichier de licence est enregistré dans C:\\ProgramData\\Nanosoft AS\\RegWizard\\Licenses."),
+  etape(16, "La licence est valable un an. À l'échéance, la renouveler gratuitement depuis l'espace personnel, puis relancer l'assistant d'enregistrement."),
 
   titre("5. En cas de problème"),
   p("- Pas d'accès internet (proxy de l'école) : l'assistant propose l'envoi de la demande par e-mail. Envoyer le message sans le modifier, puis charger le fichier de licence reçu avec « activation manuelle »."),
-  p("- Une licence Free ne s'active que sur un seul ordinateur. Chaque membre du binôme crée son propre numéro de série."),
-  p("- Numéro de série perdu : il figure dans « My account » et dans l'e-mail reçu à la création."),
+  p("- Un numéro de série couvre le nombre de postes indiqué sur la carte (« Number of licenses »). Au-delà, chacun crée son propre compte et son propre numéro de série."),
+  p("- Numéro de série perdu : il figure dans l'espace personnel (bouton « Details ») et dans l'e-mail reçu à la création."),
 
-  titre("6. Ouvrir le bloc du sous-compteur"),
-  p("Ouvrir plans/sous-compteur.dwg (ou le .dxf) avec Fichier, Ouvrir. Pour l'insérer dans un plan : commande INSERER, puis Parcourir. nanoCAD demande alors REPERE, DN et ZONE."),
+  titre("6. Ouvrir les plans"),
+  p("Dans nanoCAD : Fichier, puis Ouvrir, et choisir le plan .dwg de l'ECAM."),
 ];
 
 const doc = new Document({ sections: [{ properties: { page: { margin: { top: 1000, bottom: 1000, left: 1200, right: 1200 } } }, children: contenu }] });
