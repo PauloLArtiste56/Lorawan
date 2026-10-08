@@ -108,6 +108,43 @@ Le 28/09, testeur posé près de la passerelle `7766554433221100` :
 Ce dernier point est une démonstration directe du compromis portée contre
 débit, mesurée sur site. Elle a sa place dans la partie propagation.
 
+## Carte des points (panneau Geomap)
+
+Table `points_mesure` : un point par compteur et par passerelle, coordonnées
+relevées à la main sur Google Maps (clic droit sur le bâtiment).
+
+```sql
+CREATE TABLE points_mesure (
+    emplacement TEXT PRIMARY KEY,
+    type        TEXT NOT NULL,          -- 'compteur' ou 'passerelle'
+    latitude    DOUBLE PRECISION NOT NULL,
+    longitude   DOUBLE PRECISION NOT NULL
+);
+```
+
+| Emplacement | Type | Latitude | Longitude |
+|---|---|---|---|
+| CG | compteur | 48.047322 | -1.742056 |
+| SC1 | compteur | 48.047510 | -1.742984 |
+| SC2 | compteur | 48.046397 | -1.743181 |
+| SC3 | compteur | 48.047395 | -1.743435 |
+| SC4 | compteur | 48.046520 | -1.743644 |
+| GW 7766554433221100 | passerelle | 48.047303 | -1.744061 |
+| GW 7276ff0039090e67 | passerelle | 48.046959 | -1.743986 |
+| GW 7276ff0039090e70 | passerelle | 48.046946 | -1.744010 |
+
+Les passerelles sont à leur place provisoire du 08/10/2026. Le nom
+`emplacement` doit être identique à celui saisi pendant la campagne, sinon les
+mesures ne se rattachent pas au point.
+
+Panneau « Ecam_Maps » : Geomap, requête `SELECT emplacement, type, latitude,
+longitude FROM points_mesure`, vue centrée en 48.047, -1.7431, zoom 17,5.
+Couleur par le champ `type` avec deux value mappings (compteur en bleu,
+passerelle en rouge), étiquette par le champ `emplacement`, légende masquée.
+
+Le CG est le point le plus éloigné des passerelles (environ 150 m), les autres
+compteurs sont entre 60 et 100 m.
+
 ## Points restants
 
 - Le mot de passe PostgreSQL et celui de Grafana sont `admin`. Acceptable tant
