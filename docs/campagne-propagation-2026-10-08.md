@@ -31,12 +31,18 @@ Un point est validé s'il est vu par au moins 2 passerelles fiables.
 
 ## Résultats
 
+Pour chaque passerelle : trames reçues sur trames émises, RSSI moyen, SNR moyen.
+
 | Point | e67 | e70 | 7766 | Passerelles fiables | Verdict |
 |---|---|---|---|---|---|
-| SC1 | 8/8, -104 à -113 dBm, SNR -6 à +7 dB | 5/8, SNR -7,5 à -12 dB | 0/8 | **1** | Non validé |
-| SC2 | 7/8, -96 à -112 dBm, SNR -1,75 à +11 dB | 7/8, -111 à -114 dBm, SNR -4,2 à +2 dB | 0/8 | 2 | Validé |
-| SC3 | toutes, vers -80 dBm, SNR vers +11 dB | toutes, vers -100 dBm, SNR +1,5 à +10,8 dB | environ 7/12, SNR -6,8 à -12,5 dB | 2 | Validé |
-| SC4 | 10/11, -77 à -96 dBm, SNR +8 à +12,5 dB | 11/11, -90 à -110 dBm, SNR +3,8 à +11,5 dB | 0/11 | 2 | Validé |
+| SC1 | 8/8, -108 dBm, +3,9 dB | 5/8, -113 dBm, -10,5 dB | 0/8 | **1** | Non validé |
+| SC2 | 7/8, -104 dBm, +6,2 dB | 7/8, -113 dBm, -0,7 dB | 0/8 | 2 | Validé |
+| SC3 | 11/12, -80 dBm, +10,6 dB | 12/12, -102 dBm, +8,3 dB | 7/12, -110 dBm, -6,7 dB | 2 | Validé |
+| SC4 | 10/12, -86 dBm, +10,9 dB | 12/12, -97 dBm, +9,0 dB | 0/12 | 2 | Validé |
+
+Les valeurs du SC2 portent sur les 8 trames de 11:38:43 à 11:40:43. D'autres
+trames ont pu être étiquetées SC2 pendant le trajet vers le SC4 : à vérifier
+dans la base avant de figer ce tableau.
 
 Une trame du SC2 (11:39:58) n'a été reçue par aucune passerelle.
 
