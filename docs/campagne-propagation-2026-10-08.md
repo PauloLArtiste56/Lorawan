@@ -40,9 +40,8 @@ Pour chaque passerelle : trames reçues sur trames émises, RSSI moyen, SNR moye
 | SC3 | 11/12, -80 dBm, +10,6 dB | 12/12, -102 dBm, +8,3 dB | 7/12, -110 dBm, -6,7 dB | 2 | Validé |
 | SC4 | 10/12, -86 dBm, +10,9 dB | 12/12, -97 dBm, +9,0 dB | 0/12 | 2 | Validé |
 
-Les valeurs du SC2 portent sur les 8 trames de 11:38:43 à 11:40:43. D'autres
-trames ont pu être étiquetées SC2 pendant le trajet vers le SC4 : à vérifier
-dans la base avant de figer ce tableau.
+Vérifié le 04/11 : les trames prises pendant les trajets entre points ont été
+réétiquetées `trajet` et sont exclues de ce tableau.
 
 Une trame du SC2 (11:39:58) n'a été reçue par aucune passerelle.
 
