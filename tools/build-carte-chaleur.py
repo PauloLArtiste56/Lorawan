@@ -1,13 +1,15 @@
 """Carte de couverture mesurée : RSSI interpolé entre les points du balayage.
 
-Usage : python3 build-carte-chaleur.py plan.png passerelles.csv sortie.png "sous-titre" [passerelle]
+Usage : python3 build-carte-chaleur.py plan.png passerelles.csv sortie.png "sous-titre" [passerelle] [rampe]
 
 passerelles.csv : une ligne par point et par passerelle, séparateur « ; »,
 colonnes emplacement, gateway_id et rssi (docs/balayage-AAAA-MM-JJ-passerelles.csv).
 Sans cinquième argument, la carte montre pour chaque point le RSSI de la
 meilleure passerelle. Avec la fin d'un identifiant de passerelle (« 0e67 »),
 elle montre cette passerelle seule ; un point qu'elle n'a pas reçu est marqué
-« non reçu ». Le plan n'est pas versionné : le passer en argument.
+« non reçu » (passer "" pour toutes les passerelles). Rampe : « bleu » par
+défaut, ou « rouge-vert » (rouge = faible, vert = fort). Le plan n'est pas
+versionné : le passer en argument.
 
 L'interpolation est une moyenne pondérée par l'inverse du carré de la
 distance aux points mesurés. Elle s'efface au-delà d'une certaine distance
@@ -26,13 +28,17 @@ from points_balayage import POINTS
 # La rampe part d'un bleu déjà visible : le blanc est réservé aux zones sans mesure.
 RAMPE = ["#b7d3f6", "#9ec5f4", "#86b6ef", "#6da7ec", "#5598e7", "#3987e5",
          "#2a78d6", "#256abf", "#1c5cab", "#184f95", "#104281", "#0d366b"]
+RAMPE_ROUGE_VERT = ["#d03b3b", "#e8703a", "#f5a83a", "#f5d33c", "#b9d84a", "#62bd45", "#1e9e3a"]
 RSSI_MIN, RSSI_MAX = -115, -85          # bornes de la rampe, en dBm
 ENCRE, ENCRE_2 = (11, 11, 11), (82, 81, 78)
 PAS = 6                                 # maille de calcul, en pixels
 
 plan, mesures, sortie = sys.argv[1:4]
 sous_titre = sys.argv[4] if len(sys.argv) > 4 else ""
-passerelle = sys.argv[5] if len(sys.argv) > 5 else None
+passerelle = (sys.argv[5] if len(sys.argv) > 5 else "") or None
+rouge_vert = len(sys.argv) > 6 and sys.argv[6] == "rouge-vert"
+if rouge_vert:
+    RAMPE = RAMPE_ROUGE_VERT
 
 rssi = {}
 with open(mesures, encoding="utf-8") as f:
@@ -109,7 +115,7 @@ for v in range(RSSI_MIN, RSSI_MAX + 1, 10):
     x = lx0 + (v - RSSI_MIN) / (RSSI_MAX - RSSI_MIN) * (lx1 - lx0)
     d.line([x, ly1, x, ly1 + round(BANDEAU * 0.04)], fill=ENCRE_2, width=3)
     d.text((x, ly1 + round(BANDEAU * 0.06)), f"{v}", font=police(0.0125), fill=ENCRE_2, anchor="ma")
-d.text((lx1 + round(L * 0.03), ly0), "Clair : signal faible. Foncé : signal fort.",
+d.text((lx1 + round(L * 0.03), ly0), "Rouge : signal faible. Vert : signal fort." if rouge_vert else "Clair : signal faible. Foncé : signal fort.",
        font=police(0.0125), fill=ENCRE_2)
 d.text((lx1 + round(L * 0.03), ly0 + round(BANDEAU * 0.12)), "Blanc : zone non mesurée.",
        font=police(0.0125), fill=ENCRE_2)
