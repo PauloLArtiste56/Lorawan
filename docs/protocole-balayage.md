@@ -15,6 +15,12 @@ pas seulement aux emplacements des sous-compteurs.
    - les deux emplacements candidats du S1 (atelier et couloir).
 3. Compter les points. Ordre de grandeur : 30 points, environ 1 h 15 sur site.
 
+Points retenus le 13/11 : 23 points au rez-de-chaussée, B01 à B23, numérotés
+dans l'ordre du parcours (hall, aile A, cafétéria, S1, anneau, S2, DSI, S3,
+S4, annexe, retour par le couloir ouest). Maupertuis est écarté du balayage.
+Leurs positions sur le plan sont dans `tools/build-plan-balayage.py`, qui
+redessine la carte à partir de l'image du plan.
+
 ## Mesurer (sur site, à deux)
 
 Rôles : l'un porte le NETW'O et le plan, l'autre suit en SSH sur téléphone ou
