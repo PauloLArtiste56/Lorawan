@@ -1,10 +1,13 @@
 """Carte de couverture mesurée : RSSI interpolé entre les points du balayage.
 
-Usage : python3 build-carte-chaleur.py plan.png mesures.csv sortie.png "sous-titre"
+Usage : python3 build-carte-chaleur.py plan.png passerelles.csv sortie.png "sous-titre" [passerelle]
 
-mesures.csv : séparateur « ; », colonnes emplacement et rssi (la 4e colonne
-du fichier docs/balayage-AAAA-MM-JJ.csv). Le plan n'est pas versionné : le
-passer en argument.
+passerelles.csv : une ligne par point et par passerelle, séparateur « ; »,
+colonnes emplacement, gateway_id et rssi (docs/balayage-AAAA-MM-JJ-passerelles.csv).
+Sans cinquième argument, la carte montre pour chaque point le RSSI de la
+meilleure passerelle. Avec la fin d'un identifiant de passerelle (« 0e67 »),
+elle montre cette passerelle seule ; un point qu'elle n'a pas reçu est marqué
+« non reçu ». Le plan n'est pas versionné : le passer en argument.
 
 L'interpolation est une moyenne pondérée par l'inverse du carré de la
 distance aux points mesurés. Elle s'efface au-delà d'une certaine distance
@@ -29,15 +32,19 @@ PAS = 6                                 # maille de calcul, en pixels
 
 plan, mesures, sortie = sys.argv[1:4]
 sous_titre = sys.argv[4] if len(sys.argv) > 4 else ""
+passerelle = sys.argv[5] if len(sys.argv) > 5 else None
 
 rssi = {}
 with open(mesures, encoding="utf-8") as f:
     for ligne in csv.DictReader(f, delimiter=";"):
-        rssi[ligne["emplacement"]] = float(ligne["rssi_moyen_dbm"])
+        if passerelle and not ligne["gateway_id"].endswith(passerelle):
+            continue
+        p, v = ligne["emplacement"], float(ligne["rssi"])
+        rssi[p] = max(v, rssi.get(p, v))
 
 img = Image.open(plan).convert("RGB")
 L, H = img.size
-pts = [(n, fx * L, fy * H, rssi[n]) for n, fx, fy in POINTS if n in rssi]
+pts = [(n, fx * L, fy * H, rssi.get(n)) for n, fx, fy in POINTS]
 
 # Interpolation sur une maille grossière
 gy, gx = np.mgrid[0:H:PAS, 0:L:PAS]
@@ -45,6 +52,7 @@ num = np.zeros(gx.shape)
 den = np.zeros(gx.shape)
 dmin = np.full(gx.shape, np.inf)
 for _, x, y, v in pts:
+    v = RSSI_MIN if v is None else v     # non reçu : plancher de la rampe
     d2 = (gx - x) ** 2 + (gy - y) ** 2 + 1.0
     num += v / d2
     den += 1.0 / d2
@@ -110,8 +118,12 @@ d.text((lx1 + round(L * 0.03), ly0 + round(BANDEAU * 0.12)), "Blanc : zone non m
 r = round(L * 0.0048)
 for nom, x, y, v in pts:
     y += BANDEAU
-    d.ellipse([x - r, y - r, x + r, y + r], fill=ENCRE, outline="white", width=max(2, r // 3))
-    d.text((x + r * 1.8, y), f"{nom}  {v:.0f}", font=police(0.0125, True), fill=ENCRE,
+    if v is None:                        # pastille creuse : aucune trame reçue
+        d.ellipse([x - r, y - r, x + r, y + r], fill="white", outline=ENCRE, width=max(3, r // 3))
+    else:
+        d.ellipse([x - r, y - r, x + r, y + r], fill=ENCRE, outline="white", width=max(2, r // 3))
+    libelle = f"{nom}  non reçu" if v is None else f"{nom}  {v:.0f}"
+    d.text((x + r * 1.8, y), libelle, font=police(0.0125, True), fill=ENCRE,
            stroke_width=max(3, r // 2), stroke_fill="white", anchor="lm")
 
 toile.save(sortie)
